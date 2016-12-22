@@ -648,7 +648,9 @@
 
                <?php
                $US_Total = mysql_fetch_array($us_empl_result, MYSQL_ASSOC);
-               $others_Total = ($total_mos_2016 - $US_Total['USEmp']);
+               //$others_Total = mysql_fetch_array($other_empl_result, MYSQL_ASSOC);;
+               $others_Total = ($total_mos_2016 -  $US_Total['USEmp']);
+               $US_Total_special = mysql_fetch_array($US_empl_result_special, MYSQL_ASSOC);
                ?>
 
                <div class="col-lg-3 col-sm-6" style="padding-left: 0px">
@@ -684,7 +686,7 @@
                             <div class="col-xs-7">
                                 <div class="numbers">
                                     <p>NA</p>
-                                    <a href="NA_MO.php"><?php echo $US_Total['USEmp'] ?> </a>
+                                    <a href="NA_MO.php"><?php echo $US_Total_special['USEmp'] ?> </a>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ITP Data NON-NA</title>
+	<title>Order Classification</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="assets/js/jquery-1.10.2.js"></script>
 	<!-- Compiled and minified CSS -->
@@ -24,50 +24,9 @@
 	</style>
 	<?php include 'database_retrival.php' ?>
 </head>
+
 <body>
-</body>
-<?php
-$query_us_employees_each = "SELECT distinct person, sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as USEmp FROM `abcd_it_2016` WHERE person NOT IN ( 'Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar') GROUP BY person";
 
-$us_empl_result_each = mysql_query($query_us_employees_each, $conn);
 
-	if (!$us_empl_result_each) { // add this check.
-		die('Invalid query: ' . mysql_error());
-	}
-
-	echo "<style>
-	table {
-		border-collapse: collapse;
-		width: 60%;
-	}
-
-	th, td {
-		text-align: left;
-		padding: 5px;
-	}
-
-	tr:nth-child(even){background-color: #f2f2f2}
-
-	th {
-		background-color: #F0AB00;
-		color: white;
-	}
-</style>";
-
-echo "<center><table border='1'>
-<tr>
-<th><b>Person</b></th>
-	<th><b>Days</b></th>
-</tr>";
-
-while($row = mysql_fetch_array($us_empl_result_each, MYSQL_ASSOC)){
-	$url_bind = "person_lookup.php?person=";
-	$url_bind .= $row['person'];
-	$url_bind .= "&department=ITP";
-	echo '<tr><td><a href="' . $url_bind . '">' . $row['person'] . '</a></td><td>' . $row['USEmp'] . '</td></tr>';
-}
-echo '</table></center>';
-
-?>
 </body>
 </html>

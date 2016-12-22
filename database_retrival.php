@@ -219,7 +219,7 @@ $services_result_mos = mysql_query($query_services, $conn);
 
 	//Based on US employees
 
-	$query_us_employees = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Customer Order'";
+	$query_us_employees = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as USEmp FROM `abcd_mos_2016` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')";
 
 	$us_empl_result = mysql_query($query_us_employees, $conn);
 
@@ -228,6 +228,21 @@ $services_result_mos = mysql_query($query_services, $conn);
 	}
 
 
+	$query_US_employees_special = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar') AND orderType = 'Customer Order'";
+
+	$US_empl_result_special = mysql_query($query_US_employees_special, $conn);
+
+	if (!$US_empl_result_special) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
+
+	$query_other_employees = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person NOT IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Customer Order'";
+
+	$other_empl_result = mysql_query($query_other_employees, $conn);
+
+	if (!$other_empl_result) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
 
 
 	$NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2016`";
@@ -468,13 +483,32 @@ $services_result_mos = mysql_query($query_services, $conn);
 
    	//Based on US employees
 
-	$query_us_employees_it = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')  AND orderType = 'Customer Order'";
+	$query_us_employees_it = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as USEmp FROM `abcd_it_2016` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')";
 
 	$us_empl_result_it = mysql_query($query_us_employees_it, $conn);
 
 	if (!$us_empl_result_it) { // add this check.
 		die('Invalid query: ' . mysql_error());
 	}
+
+
+	$query_other_employees_it_special = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')  AND orderType = 'Customer Order'";
+
+	$other_empl_result_it_special = mysql_query($query_other_employees_it_special, $conn);
+
+	if (!$other_empl_result_it_special) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
+
+
+	$query_other_employees_it = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person NOT IN ( 'Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')  AND orderType = 'Customer Order'";
+
+	$other_empl_result_it = mysql_query($query_other_employees_it, $conn);
+
+	if (!$other_empl_result_it) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
+
 
 
 	$NoServicesIT = "SELECT count(SO) as Total FROM `abcd_it_2016_extra`";
