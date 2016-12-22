@@ -1727,7 +1727,7 @@ textarea.form-control {
   width: 100%;
 }
 .card .content {
-  padding: 15px 15px 10px 15px;
+  padding: 5px 5px 5px 5px;
 }
 .card .header {
   padding: 20px 20px 0;
@@ -2704,10 +2704,10 @@ textarea.form-control {
     padding: 6px;
   }
   .card form [class*="col-"]:first-child {
-    padding-left: 15px;
+    padding-left: 5px;
   }
   .card form [class*="col-"]:last-child {
-    padding-right: 15px;
+    padding-right: 5px;
   }
 }
 /*          Changes for small display      */

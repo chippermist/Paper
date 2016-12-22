@@ -86,11 +86,13 @@
 
 	<body>
 		<div class="row">
-			<div class="left" style="width:50%">
-				<canvas id="2016_2015_line"></canvas>
-			</div> 
+            <div class="col-md-6" style="width:50%">
 			
-			<div>
+				<canvas id="2016_2015_line"></canvas>
+			
+            </div>
+			
+			<div class="col-md-6" style="width:50%">
 			<?php
 				echo "<style>
 					table {
@@ -130,7 +132,7 @@
 				echo '</table>';
 			?>
 			</div>
-
+            
 			<div>
 				<?php
 				echo '<table><thead><tr><th>Country</th><th>2015</th><th>2016</th></tr></thead>';

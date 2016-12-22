@@ -71,10 +71,10 @@
 	<body>
 		<div class="row">
         <br><br><br>
-			<div class="left" style="width:50%">
+			<div class="col-md-6" style="width:50%">
 				<canvas id="chartContainer2016Bar"></canvas>
 			</div> 
-			<div >
+			<div class="col-md-6">
 			<?php
 				echo "<style>
 					table {

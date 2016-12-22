@@ -2,3 +2,8 @@
 
 - V1.1.0, 30 Sept 2016 - New Page
 - added Upgrade to PRO page for those who want to upsell inside the dashboard
+
+
+-- total number of SO
+-- NA and Non NA details
+-- Legend

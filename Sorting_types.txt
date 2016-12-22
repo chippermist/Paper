@@ -1,0 +1,43 @@
+SAP Going Live Support
+
+
+SAP Empowering Service
+SAP E2E Empowering Workshop
+
+SAP Migration Planning Workshop
+SAP Technical Integration Check
+SAP Technical Integration Check-Extended
+
+
+SAP Tech Feasibility Check-Upgrade
+SAP Technical Feasibility Check
+
+
+SAP Custom Code Management
+SAP ESRV Custom Code Assessment
+
+
+SAP Platform Design Support
+
+
+
+SAP Tech Integration Check-Upgrade
+SAP Integration Validation
+
+SAP IT Planning Service
+SAP Build Design Support
+
+SAP Software Change Management
+
+-->?SAP Upgrade Assessment
+SAP Planning the Digital Transformation
+
+
+SAP On Call Duty
+SAP CDP On-Site Support
+
+SAP ESRV ALM Roadmap
+SAP ESRV SysMon
+SAP ESRV Change Control Management
+SAP ESRV Delivery Management
+SAP ESRV Business Downtime Optimization

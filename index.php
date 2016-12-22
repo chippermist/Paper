@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>MOS Dashboard</title>
+    <title>MOS Dashboard</title>
 
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
 
@@ -33,197 +34,174 @@
     <script type="text/javascript" src="assets/js/main.js"></script>
     <script type="text/javascript" src="assets/js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.4/randomColor.min.js"></script>
-      <!-- Compiled and minified CSS -->
+    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
-    
-    <!-- Data Retrival PHP File - very important -->
-    <?php include 'database_retrival.php' ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        <?php
 
+    <style type="text/css">
+        .canvasjs-chart-credit {
+           display: none;
+       }
+   </style>
+   <!-- Data Retrival PHP File - very important -->
+   <?php include 'database_retrival.php' ?>
+
+   <script type="text/javascript">
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+        {
+            toolTip:{
+        enabled: false   //enable here
+      },
+      legend: {
+        horizontalAlign: "center"
+     },
+            data: [
+            {
+            //startAngle: 45,
+            //animationEnabled: true,
+            indexLabelFontSize: 12.5,
+            //indexLabelFontFamily: "Garamond",
+            //indexLabelFontColor: "darkgrey",
+            indexLabelLineColor: "darkgrey",
+            indexLabelPlacement: "outside",
+            type: "doughnut",
+            showInLegend: true,
+            dataPoints: [
+            <?php
+            $rowNumber = 0;
             while($row = mysql_fetch_array($services_result_mos_filter_2016, MYSQL_ASSOC)){
-                $label_array[] = $row['Service'];
-                $data_points[] = $row['Total'];
+                echo '{ y:' . $row['Total'] . ', legendText: "' . $row['Service'] . '", indexLabel: "#percent%"}'; 
+                if(mysql_fetch_array($services_result_mos_filter_2016, MYSQL_ASSOC)){
+                    mysql_data_seek($services_result_mos_filter_2016, ($rowNumber+1));
+                    echo ',';
+                    $rowNumber++;
+                }
             }
 
-        ?>
+            ?>
 
-        var temp_labels = <?php echo json_encode($label_array); ?>;
-        var temp_points = <?php echo json_encode($data_points); ?>;
-        var temp_colors = [];
-        
-        for (i = 0; i < temp_points.length; i++) { 
-            temp_colors.push(randomColor({luminosity: 'dark'}));
+
+
+
+            ]
         }
+        ]
+    });
 
-        var pieData = {
-            labels : temp_labels,
-            datasets: [
-                {
-                    backgroundColor: temp_colors,
-                    data: temp_points
+        chart.render();
+    }
+</script>
+
+
+<script type="text/javascript">
+
+    var dataBar2016 = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
+        {
+            backgroundColor: '#F1C40F',
+            borderColor: "#F1C40F",
+            data: [<?php echo $jan_mos_2016 ?>, <?php echo $feb_mos_2016 ?>, <?php echo $mar_mos_2016 ?>, <?php echo $apr_mos_2016 ?>, <?php echo $may_mos_2016 ?>, <?php echo $jun_mos_2016 ?>, <?php echo $jul_mos_2016 ?>, <?php echo $aug_mos_2016 ?>, <?php echo $sep_mos_2016 ?>, <?php echo $oct_mos_2016 ?>, <?php echo $nov_mos_2016 ?>, <?php echo $dec_mos_2016 ?>],
+            borderWidth: 1,
+        }
+        ]
+    };
+
+    Chart.plugins.register({
+      beforeDraw: function(chartInstance) {
+        var ctx = chartInstance.chart.ctx;
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, chartInstance.chart.width, chartInstance.chart.height);
+    }
+});
+
+    function barChart1(){
+        var newChart = new Chart("chartContainer2016Bar", {
+            type: 'bar',
+            data: dataBar2016,
+            options: {
+                legend: {
+                    display: false
                 }
-            ]
-        };
-
-        var doughnutOptions = {
-          legend: {display: true, position: 'bottom'},
-          animation: {
-            duration: 500,
-            easing: "easeOutQuart",
-            onComplete: function () {
-              var ctx = this.chart.ctx;
-              ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'bottom';
-
-              this.data.datasets.forEach(function (dataset) {
-
-                for (var i = 0; i < dataset.data.length; i++) {
-                  var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-                      total = dataset._meta[Object.keys(dataset._meta)[0]].total,
-                      mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
-                      start_angle = model.startAngle,
-                      end_angle = model.endAngle,
-                      mid_angle = start_angle + (end_angle - start_angle)/2;
-
-                  var x = mid_radius * Math.cos(mid_angle);
-                  var y = mid_radius * Math.sin(mid_angle);
-
-                  ctx.fillStyle = '#fff';
-                  // if (i == 3){ // Darker text color for lighter background
-                  //   ctx.fillStyle = '#444';
-                  // }
-                  var percent = String((dataset.data[i]/total*100).toFixed(1)) + "%";
-                  ctx.fillText(dataset.data[i], model.x + x, model.y + y);
-                  // Display percent in another line, line break doesn't work for fillText
-                  ctx.fillText(percent, model.x + x, model.y + y + 15);
+                ,scales: {
+                    xAxes: [{
+                        barThickness: 25,
+                        gridLines: {
+                            display:false
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display:false
+                        },
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
                 }
-              });               
             }
-          }
-        };
-
-        function pieChart() {
-        var myNewChart = new Chart("pieChart", {
-            type: 'doughnut',
-            data: pieData,
-            options: doughnutOptions
-
-            })
-        };
-
-
-    addFunctionOnWindowLoad(pieChart);
-    </script>
-
-    <script type="text/javascript">
-
-        var dataBar2016 = {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [
-                {
-                    backgroundColor: '#F1C40F',
-                    borderColor: "#F1C40F",
-                    data: [<?php echo $jan_mos_2016 ?>, <?php echo $feb_mos_2016 ?>, <?php echo $mar_mos_2016 ?>, <?php echo $apr_mos_2016 ?>, <?php echo $may_mos_2016 ?>, <?php echo $jun_mos_2016 ?>, <?php echo $jul_mos_2016 ?>, <?php echo $aug_mos_2016 ?>, <?php echo $sep_mos_2016 ?>, <?php echo $oct_mos_2016 ?>, <?php echo $nov_mos_2016 ?>, <?php echo $dec_mos_2016 ?>],
-                    borderWidth: 1,
-                }
-            ]
-        };
-
-        Chart.plugins.register({
-          beforeDraw: function(chartInstance) {
-            var ctx = chartInstance.chart.ctx;
-            ctx.fillStyle = "white";
-            ctx.fillRect(0, 0, chartInstance.chart.width, chartInstance.chart.height);
-          }
         });
-
-        function barChart1(){
-            var newChart = new Chart("chartContainer2016Bar", {
-                type: 'bar',
-                data: dataBar2016,
-                options: {
-                    legend: {
-                        display: false
-                    }
-                    ,scales: {
-                            xAxes: [{
-                                barThickness: 25,
-                                gridLines: {
-                                    display:false
-                                }
-                            }],
-                            yAxes: [{
-                                gridLines: {
-                                    display:false
-                                },
-                                ticks: {
-                                    beginAtZero:true
-                                }
-                            }]
-                    }
-                }
-            });
-        } 
+    } 
 
 
     addFunctionOnWindowLoad(barChart1);
-    </script>
-    
-     <script type="text/javascript">
-        var data_years = {
+</script>
+
+<script type="text/javascript">
+    var data_years = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
-            {
-                label: "2015",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(30,144,255,1)",
-                borderColor: "rgba(30,144,255,1)",
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "#F15854",
-                pointHoverBorderColor: "#F15854",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [<?php echo $jan_mos_2015 ?>, <?php echo $feb_mos_2015 ?>, <?php echo $mar_mos_2015 ?>, <?php echo $apr_mos_2015 ?>, <?php echo $may_mos_2015 ?>, <?php echo $jun_mos_2015 ?>, <?php echo $jul_mos_2015 ?>, <?php echo $aug_mos_2015 ?>, <?php echo $sep_mos_2015 ?>, <?php echo $oct_mos_2015 ?>, <?php echo $nov_mos_2015 ?>, <?php echo $dec_mos_2015 ?>],
-                spanGaps: false
-            },
-            {
-                label: "2016",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(255,165,0,1)",
-                borderColor: "rgba(255,165,0,1)",
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "#F15854",
-                pointHoverBorderColor: "#F15854",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [<?php echo $jan_mos_2016 ?>, <?php echo $feb_mos_2016 ?>, <?php echo $mar_mos_2016 ?>, <?php echo $apr_mos_2016 ?>, <?php echo $may_mos_2016 ?>, <?php echo $jun_mos_2016 ?>, <?php echo $jul_mos_2016 ?>, <?php echo $aug_mos_2016 ?>, <?php echo $sep_mos_2016 ?>, <?php echo $oct_mos_2016 ?>, <?php echo $nov_mos_2016 ?>, <?php echo $dec_mos_2016 ?>],
-                spanGaps: false
-            }
+        {
+            label: "2015",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(30,144,255,1)",
+            borderColor: "rgba(30,144,255,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#F15854",
+            pointHoverBorderColor: "#F15854",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [<?php echo $jan_mos_2015 ?>, <?php echo $feb_mos_2015 ?>, <?php echo $mar_mos_2015 ?>, <?php echo $apr_mos_2015 ?>, <?php echo $may_mos_2015 ?>, <?php echo $jun_mos_2015 ?>, <?php echo $jul_mos_2015 ?>, <?php echo $aug_mos_2015 ?>, <?php echo $sep_mos_2015 ?>, <?php echo $oct_mos_2015 ?>, <?php echo $nov_mos_2015 ?>, <?php echo $dec_mos_2015 ?>],
+            spanGaps: false
+        },
+        {
+            label: "2016",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255,165,0,1)",
+            borderColor: "rgba(255,165,0,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#F15854",
+            pointHoverBorderColor: "#F15854",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [<?php echo $jan_mos_2016 ?>, <?php echo $feb_mos_2016 ?>, <?php echo $mar_mos_2016 ?>, <?php echo $apr_mos_2016 ?>, <?php echo $may_mos_2016 ?>, <?php echo $jun_mos_2016 ?>, <?php echo $jul_mos_2016 ?>, <?php echo $aug_mos_2016 ?>, <?php echo $sep_mos_2016 ?>, <?php echo $oct_mos_2016 ?>, <?php echo $nov_mos_2016 ?>, <?php echo $dec_mos_2016 ?>],
+            spanGaps: false
+        }
         ]
     };
 
@@ -236,20 +214,20 @@
             data: data_years,
             options: {maintainAspectRatio: true}
         }
-    )
+        )
     };
 
 
     addFunctionOnWindowLoad(lineChartForYears);
-    </script>
+</script>
 
-    <!-- pie chart for USA and Canada -->
-    <script type="text/javascript">
-        var datapieCountry = {
-            labels: ["USA", "Canada"],
-            datasets: [
-                {
-                    backgroundColor: [
+<!-- pie chart for USA and Canada -->
+<script type="text/javascript">
+    var datapieCountry = {
+        labels: ["USA", "Canada"],
+        datasets: [
+        {
+            backgroundColor: [
                     // randomColor(),
                     // randomColor()
                     "#85C1E9",
@@ -257,95 +235,95 @@
                     ],
                     data: [<?php echo $totaldays_usa ?>, <?php echo $totaldays_canada ?>]
                 }
-            ]
-        };
+                ]
+            };
 
-        var pieOptions = {
-          events: false,
-          animation: {
-            duration: 500,
-            easing: "easeOutQuart",
-            onComplete: function () {
-              var ctx = this.chart.ctx;
-              ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'bottom';
+            var pieOptions = {
+              events: false,
+              animation: {
+                duration: 500,
+                easing: "easeOutQuart",
+                onComplete: function () {
+                  var ctx = this.chart.ctx;
+                  ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                  ctx.textAlign = 'center';
+                  ctx.textBaseline = 'bottom';
 
-              this.data.datasets.forEach(function (dataset) {
+                  this.data.datasets.forEach(function (dataset) {
 
-                for (var i = 0; i < dataset.data.length; i++) {
-                  var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                    for (var i = 0; i < dataset.data.length; i++) {
+                      var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
                       total = dataset._meta[Object.keys(dataset._meta)[0]].total,
                       mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
                       start_angle = model.startAngle,
                       end_angle = model.endAngle,
                       mid_angle = start_angle + (end_angle - start_angle)/2;
 
-                  var x = mid_radius * Math.cos(mid_angle);
-                  var y = mid_radius * Math.sin(mid_angle);
+                      var x = mid_radius * Math.cos(mid_angle);
+                      var y = mid_radius * Math.sin(mid_angle);
 
-                  ctx.fillStyle = '#fff';
+                      ctx.fillStyle = '#fff';
                   if (i == 3){ // Darker text color for lighter background
                     ctx.fillStyle = '#444';
-                  }
-                  var percent = String(Math.round(dataset.data[i]/total*100)) + "%";
-                  ctx.fillText(dataset.data[i], model.x + x, model.y + y);
+                }
+                var percent = String(Math.round(dataset.data[i]/total*100)) + "%";
+                ctx.fillText(dataset.data[i], model.x + x, model.y + y);
                   // Display percent in another line, line break doesn't work for fillText
                   ctx.fillText(percent, model.x + x, model.y + y + 15);
-                }
-              });               
-            }
+              }
+          });               
+              }
           }
-        };
+      };
 
 
-        function pieChartCountry() {
+      function pieChartCountry() {
         var myNewChart = new Chart("pieChartUSACanada", {
             type: 'pie',
             data: datapieCountry,
             options: pieOptions
         }
-    )
+        )
     };
 
     addFunctionOnWindowLoad(pieChartCountry);
-    </script>
+</script>
 
 
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="sidebar" data-background-color="white" data-active-color="info">
+    <div class="wrapper">
+        <div class="sidebar" data-background-color="white" data-active-color="info">
 
     <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
 		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 	-->
 
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                    Dashboards
-            </div>
-
-            <ul class="nav">
-                <li class="active">
-                    <a href="index.php">
-                        <i class="ti-panel"></i>
-                        <p>MO</p>
-                    </a>
-                </li>
-                <li class="inactive">
-                    <a href="itplanning.php">
-                        <i class="ti-panel"></i>
-                        <p>ITP</p>
-                    </a>
-                </li>
-            </ul>
-    	</div>
+   <div class="sidebar-wrapper">
+    <div class="logo">
+        Dashboards
     </div>
 
-    <div class="main-panel">
+    <ul class="nav">
+        <li class="active">
+            <a href="index.php">
+                <i class="ti-panel"></i>
+                <p>MO</p>
+            </a>
+        </li>
+        <li class="inactive">
+            <a href="itplanning.php">
+                <i class="ti-panel"></i>
+                <p>ITP</p>
+            </a>
+        </li>
+    </ul>
+</div>
+</div>
+
+<div class="main-panel">
         <!-- <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -497,21 +475,21 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="row">
+                <div class="row" style="margin-bottom: 0px">
 
-                    <div class="col-md-4">
+                    <div class="col-md-6" style="padding-left: 0px">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title"><center><a href ="all_services_mos.php">Service Days Delivered</a></center></h4>
                             </div>
                             <div class="content">
                                 <div >
-                                    <canvas id="pieChartUSACanada"></canvas>
+                                    <canvas id="pieChartUSACanada" style="height:50%"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6" style="padding-left: 0px">
                         <div class="card ">
                             <div class="header">
                                 <h4 class="title"><center><a href="MosStatsbyYear.php">2015 & 2016</a></center></h4>
@@ -519,7 +497,7 @@
                             </div>
                             <div class="content">
                                 <div >
-                                    <canvas id="2016_2015_line"></canvas>
+                                    <canvas id="2016_2015_line" style="height:50%"></canvas>
                                 </div>
 
                                 <div class="footer">
@@ -533,16 +511,16 @@
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-md-7">
+                <div class="row" style="margin-bottom: 0px">
+                    <div class="col-md-6" style="padding-left: 0px">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title"><center><a href="2016_mos.php">2016 Total: <?php echo $total_mos_2016 ?></a></center></h4>
+                                <h4 class="title"><center><a href="2016_mos.php">Total: <?php echo $total_mos_2016 ?></a></center></h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content">
                                 <div >
-                                    <canvas id="chartContainer2016Bar"></canvas>
+                                    <canvas id="chartContainer2016Bar" style="height:50%"></canvas>
                                 </div>
 
                                 <div class="footer">
@@ -553,22 +531,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                    <div class="card">
-                        <div class="header">
-                            <h4 class="title"><center><a href="services_mos_filter.php">Services</a></center></h4>
-                            <p class="category"></p>
-                        </div>
-                        <div class="content">
-                            <div >
-                                <canvas id="pieChart"></canvas>
+                    <div class="col-md-6" style="padding-left: 0px">
+                        <div class="card">
+                            <div class="header">
+                            <?php $ans = mysql_fetch_array($NoServicesResult, MYSQL_ASSOC); ?>
+                                <h4 class="title"><center><a href="newMO.php">Services: <?php echo $ans['Total']; ?></a></center></h4>
+                                <p class="category"></p>
+                            </div>
+                            <div class="content">
+                                <div >
+                                    <div id="chartContainer" style="height: 36vh; width: 100%;">
+                                        <!-- <canvas id="pieChart"></canvas> -->
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
+                    
+
                 </div>
-                <div class="row">
-                <div class="col-md-6">
+                <div class="row" style="margin-bottom: 0px">
+                    <div class="col-md-6" style="padding-left: 0px">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title"><center>Top Customers</center></h4>
@@ -583,7 +567,7 @@
                                             <th>SO Days</th>
                                         </tr> -->
                                         <ul class="collapsible popout" data-collapsible="accordion">
-                                        <?php
+                                            <?php
                                         /*while($row = mysql_fetch_array($top5_mos_result, MYSQL_ASSOC)){
                                             echo '<tr><td>' . $row['company'] . '</td><td>' . $row['Total'] . '</td></tr>';
                                         }*/
@@ -603,7 +587,7 @@
                                             $result_temp_company = mysql_query($query, $conn);
 
                                             if (!$result_temp_company) { // add this check.
-                                            die('Invalid query: ' . mysql_error());
+                                                die('Invalid query: ' . mysql_error());
                                             }
 
                                             echo '<li><div class="collapsible-header">';
@@ -612,59 +596,105 @@
                                             echo '<a href="'. $url_bind . '"><i class="material-icons">open_in_new</i></a>' . $row['company'] . '&nbsp-&nbsp<b>'. $row['Total'] . '</b></div><div class="collapsible-body"><p>';
 
                                             echo "<style>
-                                                table {
-                                                    border-collapse: collapse;
-                                                    width: 100%;
-                                                }
+                                            table {
+                                                border-collapse: collapse;
+                                                width: 100%;
+                                            }
 
-                                                th, td {
-                                                    text-align: left;
-                                                    padding: 5px;
-                                                }
+                                            th, td {
+                                                text-align: left;
+                                                padding: 5px;
+                                            }
 
-                                                tr:nth-child(even){background-color: #f2f2f2}
+                                            tr:nth-child(even){background-color: #f2f2f2}
 
-                                                th {
-                                                    background-color: #F0AB00;
-                                                    color: white;
-                                                }
-                                                </style>";
+                                            th {
+                                                background-color: #F0AB00;
+                                                color: white;
+                                            }
+                                        </style>";
 
-                                            echo "<table border='1'>
-                                              <tr>
-                                                <th><b>Service</b></th>
-                                                <th><b>Days</b></th>
-                                              </tr>";
-                                            $total = 0;
-                                                    
+                                        echo "<table border='1'>
+                                        <tr>
+                                            <th><b>Service</b></th>
+                                            <th><b>Days</b></th>
+                                        </tr>";
+                                        $total = 0;
+
 
                                             while($row = mysql_fetch_array($result_temp_company)){   //Creates a loop to loop through results
-                                            echo "<tr><td>" . $row['Service'] . "</td><td>" . $row['Total'] . "</td></tr>";  
-                                            
-                                            $total += $row['Total'];
+                                                echo "<tr><td>" . $row['Service'] . "</td><td>" . $row['Total'] . "</td></tr>";  
+
+                                                $total += $row['Total'];
                                             }
                                             echo  "<tr> <th><b>Total Days </b></th><th><b>$total </b></th> </tr>";
 
-                                           
-                                            echo "</table>"; 
-                                            mysql_close();
 
+                                            echo "</table>"; 
+                                            
 
                                             echo '</p></div></li>';
                                         }
 
                                         ?>
-                                        </ul>
+                                    </ul>
                                    <!--  </thead>
-                                    </table> -->
-                                    
+                               </table> -->
+
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <?php
+               $US_Total = mysql_fetch_array($us_empl_result, MYSQL_ASSOC);
+               $others_Total = ($total_mos_2016 - $US_Total['USEmp']);
+               ?>
+
+               <div class="col-lg-3 col-sm-6" style="padding-left: 0px">
+                <div class="card">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="icon-big icon-success text-center">
+                                    <i class="ti-world"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="numbers">
+                                    <p>Non NA</p>
+                                    <a href="NON_NA_MO.php"><?php echo $others_Total ?></a>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
-                
+                </div>
             </div>
+
+            <div class="col-lg-3 col-sm-6" style="padding-left: 0px">
+                <div class="card">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="icon-big icon-warning text-center">
+                                    <i class="ti-home"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="numbers">
+                                    <p>NA</p>
+                                    <a href="NA_MO.php"><?php echo $US_Total['USEmp'] ?> </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
+
+
+
 
             <!-- <div class="row">
                 <div class="col-md-4">
@@ -707,19 +737,19 @@
 
 </body>
 
-    <!--   Core JS Files   -->
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!--   Core JS Files   -->
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="assets/js/bootstrap-checkbox-radio.js"></script>
 
 
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
 
-    <!-- Demo ONLY  -->
-    <script type="text/javascript" src="assets/js/chartist.min.js"></script>
-    <script type="text/javascript" src="assets/js/demo.js"></script>
+<!-- Demo ONLY  -->
+<script type="text/javascript" src="assets/js/chartist.min.js"></script>
+<script type="text/javascript" src="assets/js/demo.js"></script>
 
 
 <!-- 	<script type="text/javascript">
@@ -737,6 +767,6 @@
             });
 
     	});
-	</script>  -->
+    </script>  -->
 
-</html>
+    </html>
