@@ -27,7 +27,7 @@
 <body>
 </body>
 <?php
-$query_us_employees_each = "SELECT distinct person, sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as USEmp FROM `abcd_it_2016` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar') GROUP BY person";
+$query_us_employees_each = "SELECT distinct person, sum(days) as USEmp FROM `isp_recording` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')  AND orderType = 'Customer Order' GROUP BY person";
 
 $us_empl_result_each = mysql_query($query_us_employees_each, $conn);
 
