@@ -228,13 +228,26 @@ $services_result_mos = mysql_query($query_services, $conn);
 	}
 
 
-	$query_US_employees_special = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar') AND orderType = 'Customer Order'";
+	$query_US_employees_special = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Customer Order'";
 
 	$US_empl_result_special = mysql_query($query_US_employees_special, $conn);
 
 	if (!$US_empl_result_special) { // add this check.
 		die('Invalid query: ' . mysql_error());
 	}
+
+
+
+	$query_US_employees_special_internal = "SELECT sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Internal Order'";
+
+	$US_empl_result_special_internal = mysql_query($query_US_employees_special_internal, $conn);
+
+	if (!$US_empl_result_special_internal) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
+
+
+
 
 	$query_other_employees = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person NOT IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Customer Order'";
 
@@ -492,13 +505,24 @@ $services_result_mos = mysql_query($query_services, $conn);
 	}
 
 
-	$query_other_employees_it_special = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')  AND orderType = 'Customer Order'";
+	$query_employees_it_special = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')  AND orderType = 'Customer Order'";
 
-	$other_empl_result_it_special = mysql_query($query_other_employees_it_special, $conn);
+	$empl_result_it_special = mysql_query($query_employees_it_special, $conn);
 
-	if (!$other_empl_result_it_special) { // add this check.
+	if (!$empl_result_it_special) { // add this check.
 		die('Invalid query: ' . mysql_error());
 	}
+
+
+	$query_employees_it_special_internal = "SELECT sum(days) as Total FROM `isp_recording` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')  AND orderType = 'Internal Order'";
+
+	$empl_result_it_special_internal = mysql_query($query_employees_it_special_internal, $conn);
+
+	if (!$empl_result_it_special_internal) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
+
+
 
 
 	$query_other_employees_it = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person NOT IN ( 'Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')  AND orderType = 'Customer Order'";

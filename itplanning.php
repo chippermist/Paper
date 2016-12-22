@@ -566,7 +566,7 @@
 			$US_Total_it = mysql_fetch_array($us_empl_result_it, MYSQL_ASSOC);
 			//$others_Total_it = mysql_fetch_array($other_empl_result_it, MYSQL_ASSOC);
 			$others_Total_it = ($total_it_2016 - $US_Total_it['USEmp']);
-			$US_Total_it_special = mysql_fetch_array($other_empl_result_it_special, MYSQL_ASSOC);
+			$US_Total_it_special = mysql_fetch_array($empl_result_it_special, MYSQL_ASSOC);
 			?>
 
 			<div class="col-lg-3 col-sm-6" style="padding-left: 0px">
