@@ -27,7 +27,7 @@
 <body>
 </body>
 <?php
-$query_us_employees_each = "SELECT distinct person, sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Customer Order' GROUP BY person";
+$query_us_employees_each = "SELECT distinct person, sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Sandeep Kumar', 'Deepika Paturu', 'Julio Cezar Almeida') AND orderType = 'Customer Order' GROUP BY person";
 
 $us_empl_result_each = mysql_query($query_us_employees_each, $conn);
 

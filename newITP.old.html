@@ -12,15 +12,9 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<script src="assets/js/main.js" type="text/javascript" ></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.4/randomColor.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" type="text/javascript"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js" type="text/javascript"></script>
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<style type="text/css">
-		.canvasjs-chart-credit {
-			display: none;
-		}
-	</style>
+
 
 	<?php
 
@@ -43,76 +37,92 @@
 	?>
 
 
-
-
 	<script type="text/javascript">
-
 		<?php
-		$query1_it = "SELECT distinct service, sum(days) as Days FROM `abcd_it_2016_extra` GROUP BY service";
-
-		$result1_it = mysql_query($query1_it, $conn);
-
-		if(!$result1_it) {
-			die('Could not get data from new ITP 2016 result1: ' . mysql_error());
-		}
 		
+		while($row1 = mysql_fetch_array($result1, MYSQL_ASSOC)){
+			$label_service[] = $row1['service'];
+			$service_days[] = $row1['Days'];
+		}
 		?>
 
-		window.onload = function () {
-			var chart = new CanvasJS.Chart("serviceChart",
+		var temp_labels = <?php echo json_encode($label_service); ?>;
+		var temp_points = <?php echo json_encode($service_days); ?>;
+		var temp_colors = ["#884EA0", "#2E86C1", "#28B463", "#F39C12", "#7F8C8D"];
+
+		// for (i = 0; i < temp_points.length; i++) { 
+		// 	temp_colors.push(randomColor({luminosity: 'dark'}));
+		// }
+
+		var serviceChartData = {
+			labels : temp_labels,
+			datasets: [
 			{
-				toolTip:{
-        			enabled: false   //enable here
-		    },
-		    data: [
-		    {
-            //startAngle: 45,
-            //animationEnabled: true,
-            indexLabelFontSize: 12.5,
-            //indexLabelFontFamily: "Garamond",
-            //indexLabelFontColor: "darkgrey",
-            indexLabelLineColor: "darkgrey",
-            indexLabelPlacement: "outside",
-            type: "doughnut",
-            showInLegend: true,
-            dataPoints: [
-            <?php
-            $rowNumber = 0;
-            while($row = mysql_fetch_array($result1_it, MYSQL_ASSOC)){
-            	echo '{ y:' . $row['Days'] . ', legendText: "' . $row['service'] . '", indexLabel: "#percent%"}'; 
-            	if(mysql_fetch_array($result1_it, MYSQL_ASSOC)){
-            		mysql_data_seek($result1_it, ($rowNumber+1));
-            		echo ',';
-            		$rowNumber++;
-            	}
+				backgroundColor: temp_colors,
+				data: temp_points
+			}
+			]
+		};
 
-            }
+		var serviceChartOptions = {
+			events: false,
+			animation: {
+				duration: 500,
+				easing: "easeOutQuart",
+				onComplete: function () {
+					var ctx = this.chart.ctx;
+					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+					ctx.textAlign = 'center';
+					ctx.textBaseline = 'bottom';
 
-            ?>
+					this.data.datasets.forEach(function (dataset) {
 
+						for (var i = 0; i < dataset.data.length; i++) {
+							var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+							total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+							mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
+							start_angle = model.startAngle,
+							end_angle = model.endAngle,
+							mid_angle = start_angle + (end_angle - start_angle)/2;
 
+							var x = mid_radius * Math.cos(mid_angle);
+							var y = mid_radius * Math.sin(mid_angle);
 
+							ctx.fillStyle = '#fff';
+          if (i == 3){ // Darker text color for lighter background
+          	ctx.fillStyle = '#444';
+          }
+          var percent = String(Math.round(dataset.data[i]/total*100)) + "%";
+          ctx.fillText(dataset.data[i], model.x + x, model.y + y);
+          // Display percent in another line, line break doesn't work for fillText
+          ctx.fillText(percent, model.x + x, model.y + y + 15);
+      }
+  });               
+				}
+			}
+		};
 
-            ]
-        }
-        ]
-    });
+		function serviceCategoryChart() {
+			var myNewChart = new Chart("serviceChart", {
+				type: 'doughnut',
+				data: serviceChartData,
+				options: serviceChartOptions
+			})
+		};
 
-			chart.render();
-		}
+		addFunctionOnWindowLoad(serviceCategoryChart);
+
 	</script>
-
-
 
 </head>
 <body>
 	<div class="row">
-		<div class="col s6"><br><br><br><br><div id="serviceChart"></div></div>
+		<div class="col s4"><br><br><br><br><canvas id=serviceChart></canvas></div>
 		
-		<div class="col s6">
-			<br><br><br><br>
+		<div class="col s8">
+			<br><br><br><br><br><br><br><br>
 
-			<ul class="collapsible popout" data-collapsible="accordion" style="width: 80%">
+			<ul class="collapsible popout" data-collapsible="accordion" style="width: 50%">
 
 				<?php
 				mysql_data_seek($result1, 0);

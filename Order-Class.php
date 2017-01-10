@@ -22,6 +22,26 @@
 			display: none;
 		}
 	</style>
+
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			text-align: left;
+			padding: 5px;
+		}
+
+		tr:nth-child(even){background-color: #f2f2f2}
+
+		th {
+			background-color: #F0AB00;
+			color: white;
+		}
+	</style>
+	
 	<?php include 'database_retrival.php' ?>
 
 	<?php
@@ -29,8 +49,8 @@
 	$customerorders_mo = mysql_fetch_array($US_empl_result_special, MYSQL_ASSOC);
 	$internalorders_mo = mysql_fetch_array($US_empl_result_special_internal, MYSQL_ASSOC);
 	$customerorders_itp = mysql_fetch_array($empl_result_it_special, MYSQL_ASSOC);
-	$internalorders_itp = mysql_fetch_array($US_empl_result_special_internal, MYSQL_ASSOC);;
-
+	$internalorders_itp = mysql_fetch_array($US_empl_result_special_internal, MYSQL_ASSOC);
+	$total_internal = $internalorders_itp['Total'] + $internalorders_mo['Total'];
 
 	?>
 
@@ -41,18 +61,58 @@
 			datasets: [
 			{
 				backgroundColor: [
-				"#85C1E9",
-				"rgba(255,165,0,1)"
+				"#52BE80",
+				"#EB984E"
 				],
 				data: [<?php echo ($internalorders_mo['Total'] + $internalorders_itp['Total']) ?>, <?php echo ($customerorders_mo['USEmp'] + $customerorders_itp['USEmp']) ?>]
 			}
 			]
 		};
 
+		var pieOptions = {
+			events: false,
+			animation: {
+				duration: 500,
+				easing: "easeOutQuart",
+				onComplete: function () {
+					var ctx = this.chart.ctx;
+					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+					ctx.textAlign = 'center';
+					ctx.textBaseline = 'bottom';
+
+					this.data.datasets.forEach(function (dataset) {
+
+						for (var i = 0; i < dataset.data.length; i++) {
+							var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+							total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+							mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
+							start_angle = model.startAngle,
+							end_angle = model.endAngle,
+							mid_angle = start_angle + (end_angle - start_angle)/2;
+
+							var x = mid_radius * Math.cos(mid_angle);
+							var y = mid_radius * Math.sin(mid_angle);
+
+							ctx.fillStyle = '#fff';
+                  if (i == 3){ // Darker text color for lighter background
+                  	ctx.fillStyle = '#444';
+                  }
+                  var percent = String(Math.round(dataset.data[i]/total*100)) + "%";
+                //ctx.fillText(dataset.data[i], model.x + x, model.y + y);
+                  // Display percent in another line, line break doesn't work for fillText
+                  ctx.fillText(percent, model.x + x, model.y + y + 15);
+              }
+          });               
+				}
+			}
+		};
+
+
 		function pieChart() {
 			var myPieChart = new Chart("pieChart",{
 				type: 'pie',
-				data: data
+				data: data,
+				options: pieOptions
 			})
 		};
 
@@ -62,15 +122,16 @@
 </head>
 
 <body>
+	<center><h3>Internal & Customer Orders</h3></center>
 	<div class="row">
 		<div class="col s3">
 			<canvas id="pieChart"></canvas>
 		</div>
 
-		<div class="col s9">
+		<div class="col s6">
 			<ul class="collapsible popout" data-collapsible="accordion">
 				<li>
-					<div class="collapsible-header">MO</div>
+					<div class="collapsible-header"><b>MO</b></div>
 					<div class="collapsible-body">
 						<ul class="collapsible popout" data-collapsible="accordion">
 							<li>
@@ -79,7 +140,7 @@
 
 									<?php
 									echo '<ul class="collapsible popout" data-collapsible="accordion">';
-									$query1 = "SELECT distinct person, sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Customer Order' GROUP BY person";
+									$query1 = "SELECT distinct person, sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Sandeep Kumar') AND orderType = 'Customer Order' GROUP BY person";
 
 									$result1 = mysql_query($query1, $conn);
 
@@ -89,22 +150,43 @@
 
 				while($row1 = mysql_fetch_array($result1, MYSQL_ASSOC)){
 					echo '<li>';
-					echo '<div class="collapsible-header">' . $row1['person'] . ' - ' . $row1['Total'] . '</div></li>';
+					echo '<div class="collapsible-header">' . $row1['person'] . ' - ' . $row1['Total'] . '</div>';
+					echo '<div class="collapsible-body">';
+					$personname = $row1['person'];
+
+					$query2 = "SELECT SO, company, days as Total FROM `isp_recording` WHERE person = '$personname' AND orderType = 'Customer Order' GROUP BY SO";
+
+					$result2 = mysql_query($query2, $conn);
+
+				if (!$result2) { // add this check.
+					die('Invalid query: ' . mysql_error());
 				}
-				echo '</ul>';
-				?>
-			</div>
-		</li>
 
-		<li>
-			<div class="collapsible-header">Internal Order</div>
-			<div class="collapsible-body">
+				echo '<table>';
+				echo '<tr><th>SO</th><th>Company</th><th>Days</th></tr>';
+				while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC)){
+					echo '<tr><td>' . $row2['SO'] . '</td><td>' . $row2['company'] . '</td><td>' . $row2['Total'] . '</td></tr>'; 
+				}
 
-				<?php
-				echo '<ul class="collapsible popout" data-collapsible="accordion">';
-				$query1 = "SELECT distinct person, sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Internal Order' GROUP BY person";
+				echo '</table>';
 
-				$result1 = mysql_query($query1, $conn);
+
+				echo '</li>';
+			}
+			echo '</ul>';
+			?>
+		</div>
+	</li>
+
+	<li>
+		<div class="collapsible-header">Internal Order</div>
+		<div class="collapsible-body">
+
+			<?php
+			echo '<ul class="collapsible popout" data-collapsible="accordion">';
+			$query1 = "SELECT distinct person, sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Sandeep Kumar') AND orderType = 'Internal Order' GROUP BY person";
+
+			$result1 = mysql_query($query1, $conn);
 
 				if (!$result1) { // add this check.
 					die('Invalid query: ' . mysql_error());
@@ -112,7 +194,27 @@
 
 				while($row1 = mysql_fetch_array($result1, MYSQL_ASSOC)){
 					echo '<li>';
-					echo '<div class="collapsible-header">' . $row1['person'] . ' - ' . $row1['Total'] . '</div></li>';
+					echo '<div class="collapsible-header">' . $row1['person'] . ' - ' . $row1['Total'] . '</div>';
+					echo '<div class="collapsible-body">';
+					$personname = $row1['person'];
+
+					$query2 = "SELECT SO, description, days as Total FROM `isp_recording` WHERE person = '$personname' AND orderType = 'Internal Order' GROUP BY SO";
+
+					$result2 = mysql_query($query2, $conn);
+
+					if (!$result2) { // add this check.
+						die('Invalid query: ' . mysql_error());
+					}
+
+					echo '<table>';
+					echo '<tr><th>IO</th><th>Type/Company</th><th>Days</th></tr>';
+					while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC)){
+						echo '<tr><td>' . $row2['SO'] . '</td><td>' . $row2['description'] . '</td><td>' . $row2['Total'] . '</td></tr>'; 
+					}
+
+
+					echo '</table>';
+					echo '</li>';
 				}
 				echo '</ul>';
 				?>
@@ -123,18 +225,18 @@
 </li>
 
 <li>
-	<div class="collapsible-header">ITP</div>
-					<div class="collapsible-body">
-						<ul class="collapsible popout" data-collapsible="accordion">
-							<li>
-								<div class="collapsible-header">Customer Order</div>
-								<div class="collapsible-body">
+	<div class="collapsible-header"><b>ITP</b></div>
+	<div class="collapsible-body">
+		<ul class="collapsible popout" data-collapsible="accordion">
+			<li>
+				<div class="collapsible-header">Customer Order</div>
+				<div class="collapsible-body">
 
-									<?php
-									echo '<ul class="collapsible popout" data-collapsible="accordion">';
-									$query1 = "SELECT distinct person, sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar') AND orderType = 'Customer Order' GROUP BY person";
+					<?php
+					echo '<ul class="collapsible popout" data-collapsible="accordion">';
+					$query1 = "SELECT distinct person, sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar') AND orderType = 'Customer Order' GROUP BY person";
 
-									$result1 = mysql_query($query1, $conn);
+					$result1 = mysql_query($query1, $conn);
 
 				if (!$result1) { // add this check.
 					die('Invalid query: ' . mysql_error());
@@ -142,7 +244,29 @@
 
 				while($row1 = mysql_fetch_array($result1, MYSQL_ASSOC)){
 					echo '<li>';
-					echo '<div class="collapsible-header">' . $row1['person'] . ' - ' . $row1['Total'] . '</div></li>';
+					echo '<div class="collapsible-header">' . $row1['person'] . ' - ' . $row1['Total'] . '</div>';
+					echo '<div class="collapsible-body">';
+					$personname = $row1['person'];
+
+					$query2 = "SELECT SO, company, days as Total FROM `isp_recording` WHERE person = '$personname' AND orderType = 'Customer Order' GROUP BY SO";
+
+					$result2 = mysql_query($query2, $conn);
+
+					if (!$result2) { // add this check.
+						die('Invalid query: ' . mysql_error());
+					}
+
+					echo '<table>';
+					echo '<tr><th>SO</th><th>Company</th><th>Days</th></tr>';
+					while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC)){
+						echo '<tr><td>' . $row2['SO'] . '</td><td>' . $row2['company'] . '</td><td>' . $row2['Total'] . '</td></tr>'; 
+					}
+
+
+					echo '</table>';
+
+
+					echo '</li>';
 				}
 				echo '</ul>';
 				?>
@@ -165,7 +289,28 @@
 
 				while($row1 = mysql_fetch_array($result1, MYSQL_ASSOC)){
 					echo '<li>';
-					echo '<div class="collapsible-header">' . $row1['person'] . ' - ' . $row1['Total'] . '</div></li>';
+					echo '<div class="collapsible-header">' . $row1['person'] . ' - ' . $row1['Total'] . '</div>';
+					echo '<div class="collapsible-body">';
+					$personname = $row1['person'];
+
+					$query2 = "SELECT SO, description, days as Total FROM `isp_recording` WHERE person = '$personname' AND orderType = 'Internal Order' GROUP BY SO";
+
+					$result2 = mysql_query($query2, $conn);
+
+					if (!$result2) { // add this check.
+						die('Invalid query: ' . mysql_error());
+					}
+
+					echo '<table>';
+					echo '<tr><th>IO</th><th>Type/Company</th><th>Days</th></tr>';
+					while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC)){
+						echo '<tr><td>' . $row2['SO'] . '</td><td>' . $row2['description'] . '</td><td>' . $row2['Total'] . '</td></tr>'; 
+					}
+
+
+					echo '</table>';
+
+					echo '</li>';
 				}
 				echo '</ul>';
 				?>
@@ -179,9 +324,6 @@
 </li>
 </ul>
 </div>
-
-
-
 
 
 </body>

@@ -134,3 +134,32 @@ CoE Deployment RSLF/ALM NA (108030307)/S  - RDR
 CoE Novices – NA/Flietel, Sabine/REN 
 ESCA XX Walmart 12/ESC_WAL12   - first 4 ...diff for every cust.
 MCC NA Deploym. Supp Run - ES&PE Supp/Ma   - RDR
+
+
+-------------------------------------------
+
+UPDATE `isp_recording`
+SET description = 'HANA Deployment Room'
+WHERE orderType = 'Internal Order' AND company = 'MCC NA Deployment Supp HANA/Grueber, Man'
+
+UPDATE `isp_recording`
+SET description = 'BO Weekend'
+WHERE orderType = 'Internal Order' AND company = 'MCC NA Production Support Weekend/Graf,'
+
+UPDATE `isp_recording`
+SET description = 'RDR'
+WHERE orderType = 'Internal Order' AND company = 'CoE Deployment RSLF/ALM NA (108030307)/S'
+
+UPDATE `isp_recording`
+SET description = 'CoE Novice'
+WHERE orderType = 'Internal Order' AND company = 'CoE Novices ? NA/Flietel, Sabine/REN'
+
+UPDATE `isp_recording` 
+SET description = 'Escalation' 
+WHERE `company` REGEXP 'ESCA*' 
+
+UPDATE `isp_recording` 
+SET description = 'RDR' 
+WHERE company = 'MCC NA Deploym. Supp Run - ES&PE Supp/Ma'
+
+UPDATE `isp_recording` SET description = company WHERE description = ''

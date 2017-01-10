@@ -18,9 +18,20 @@
 
 	<!-- Animation library for notifications   -->
 	<link href="assets/css/animate.min.css" rel="stylesheet"/>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-89738956-1', 'auto');
+		ga('send', 'pageview');
+
+	</script>
 
 	<!--  Paper Dashboard core CSS    -->
 	<link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 	<!--  Fonts and icons     -->
@@ -69,12 +80,12 @@
 			{
 				toolTip:{
         			enabled: false   //enable here
-		    },
-		    data: [
-		    {
+        		},
+        		data: [
+        		{
             //startAngle: 45,
             //animationEnabled: true,
-            indexLabelFontSize: 12.5,
+            indexLabelFontSize: 15,
             //indexLabelFontFamily: "Garamond",
             //indexLabelFontColor: "darkgrey",
             indexLabelLineColor: "darkgrey",
@@ -466,11 +477,102 @@
 			addFunctionOnWindowLoad(pieChartCountry);
 		</script>
 
-	</head>
-	<body>
 
-		<div class="wrapper">
-			<div class="sidebar" data-background-color="white" data-active-color="info">
+
+
+		<script>
+			<?php
+
+			$S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_2016`";
+
+			$S_4_Count = mysql_query($S_4_Query, $conn);
+
+    if (!$S_4_Count) { // add this check.
+    	die('Invalid query: ' . mysql_error());
+    }   
+
+    $row_s4 = mysql_fetch_array($S_4_Count);
+
+    $NON_S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_non_s4_2016`";
+
+    $NON_S_4_Count = mysql_query($NON_S_4_Query, $conn);
+    if (!$NON_S_4_Count) { // add this check.
+    	die('Invalid query: ' . mysql_error());
+    }   
+
+    $row_non_s4 = mysql_fetch_array($NON_S_4_Count);
+    ?>
+    
+    var data = {
+    	labels: ["S/4", "Non S/4"],
+    	datasets: [
+    	{
+    		backgroundColor: [
+    		"#52BE80",
+    		"#EB984E"
+    		],
+    		data: [<?php echo $row_s4['count'] ?>, <?php echo $row_non_s4['count'] ?>]
+    	}
+    	]
+    };
+
+    var pieOptions = {
+    	events: false,
+    	animation: {
+    		duration: 500,
+    		easing: "easeOutQuart",
+    		onComplete: function () {
+    			var ctx = this.chart.ctx;
+    			ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+    			ctx.textAlign = 'center';
+    			ctx.textBaseline = 'bottom';
+
+    			this.data.datasets.forEach(function (dataset) {
+
+    				for (var i = 0; i < dataset.data.length; i++) {
+    					var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+    					total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+    					mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
+    					start_angle = model.startAngle,
+    					end_angle = model.endAngle,
+    					mid_angle = start_angle + (end_angle - start_angle)/2;
+
+    					var x = mid_radius * Math.cos(mid_angle);
+    					var y = mid_radius * Math.sin(mid_angle);
+
+    					ctx.fillStyle = '#fff';
+                  if (i == 3){ // Darker text color for lighter background
+                  	ctx.fillStyle = '#444';
+                  }
+                  var percent = String(Math.round(dataset.data[i]/total*100)) + "%";
+                //ctx.fillText(dataset.data[i], model.x + x, model.y + y);
+                  // Display percent in another line, line break doesn't work for fillText
+                  ctx.fillText(percent, model.x + x, model.y + y + 15);
+              }
+          });               
+    		}
+    	}
+    };
+
+
+    function pieChart() {
+    	var myPieChart = new Chart("planningChart",{
+    		type: 'pie',
+    		data: data,
+    		options: pieOptions
+    	})
+    };
+
+    addFunctionOnWindowLoad(pieChart);
+
+</script>
+
+
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="sidebar" data-background-color="black" data-active-color="info">
 
 	<!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -536,7 +638,7 @@
 				<div class="card">
 					<div class="header">
 						<?php $ans_it = mysql_fetch_array($NoServicesResultIT, MYSQL_ASSOC); ?>
-						<h4 class="title"><center><a href="newITP.php">Services:  <?php echo $ans_it['Total']; ?></a></center></h4>
+						<h4 class="title"><center><a href="newITP.php">Services</a></center></h4>
 						<p class="category"></p>
 					</div>
 					<div class="content">
@@ -546,10 +648,18 @@
 					</div>
 				</div>
 			</div>
+
+			<?php
+			$US_Total_it = mysql_fetch_array($us_empl_result_it, MYSQL_ASSOC);
+			//$others_Total_it = mysql_fetch_array($other_empl_result_it, MYSQL_ASSOC);
+			$others_Total_it = ($total_it_2016 - $US_Total_it['USEmp']);
+			$US_Total_it_special = mysql_fetch_array($empl_result_it_special, MYSQL_ASSOC);
+			?>
+
 			<div class="col-md-6" style="padding-left: 0px">
 				<div class="card">
 					<div class="header">
-						<h4 class="title"><center><a href="2016_it.php">Total: <?php echo $total_it_2016 ?></a></center></h4>
+						<h2 class="title"><center><a href="2016_it.php"><?php echo ceil($others_Total_it + $US_Total_it_special['USEmp']) ?></a></center></h2>
 						<p class="category"></p>
 					</div>
 					<div class="content">
@@ -559,14 +669,30 @@
 
 					</div>
 				</div>
-			</div>
+			</div>	
 		</div>
 		<div class="row" style="margin-bottom: 0px">
+			<div class="col-md-6" style="padding-left: 0px">
+				<div class="card">
+					<div class="header">
+						<h4 class="title"><center><a href="Planning.php">Planned Projects</a></center></h4>
+						<p class="category"></p>
+					</div>
+					<div class="content">
+						<div >
+							<canvas id="planningChart" style="height:50%"></canvas>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
 			<?php
-			$US_Total_it = mysql_fetch_array($us_empl_result_it, MYSQL_ASSOC);
+			//$US_Total_it = mysql_fetch_array($us_empl_result_it, MYSQL_ASSOC);
 			//$others_Total_it = mysql_fetch_array($other_empl_result_it, MYSQL_ASSOC);
-			$others_Total_it = ($total_it_2016 - $US_Total_it['USEmp']);
-			$US_Total_it_special = mysql_fetch_array($empl_result_it_special, MYSQL_ASSOC);
+			//$others_Total_it = ($total_it_2016 - $US_Total_it['USEmp']);
+			//$US_Total_it_special = mysql_fetch_array($empl_result_it_special, MYSQL_ASSOC);
 			?>
 
 			<div class="col-lg-3 col-sm-6" style="padding-left: 0px">
@@ -610,6 +736,60 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="col-lg-3 col-sm-6" style="padding-left: 0px">
+				<div class="card">
+					<div class="content">
+						<div class="row">
+							<div class="col-xs-5">
+								<div class="icon-big icon-info text-center">
+									<i class="ti-clipboard"></i>
+								</div>
+							</div>
+							<div class="col-xs-7">
+								<div class="numbers">
+									<p>Internal Orders</p>
+									<?php 
+									$internalorders_itp = mysql_fetch_array($US_empl_result_special_internal, MYSQL_ASSOC);
+									?>
+									<a href="Order-Class.php"><?php echo  $internalorders_itp['Total'];?> </a>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-lg-3 col-sm-6" style="padding-left: 0px">
+				<div class="card">
+					<div class="content">
+						<div class="row">
+							<div class="col-xs-5">
+								<div class="icon-big icon-success text-center">
+									<i class="ti-credit-card"></i>
+								</div>
+							</div>
+							<div class="col-xs-7">
+								<div class="numbers">
+									<p>Customer Orders</p>
+									<?php 
+									mysql_data_seek($empl_result_it_special, 0);
+									$customerorders_itp = mysql_fetch_array($empl_result_it_special, MYSQL_ASSOC);
+									?>
+									<a href="Order-Class.php"><?php echo  $customerorders_itp['USEmp'];?> </a>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+
+
+
 		</div>
 	</div>
 </div>

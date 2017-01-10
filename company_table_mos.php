@@ -2,6 +2,19 @@
 <title><?php echo $_GET["company"] ?></title>
 
 <link rel="stylesheet" type="text/css" href="../dmo/css/styles.css"/>
+<style>
+h2 { 
+    display: block;
+    font-size: 2.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    text-align: center;
+    font-style: normal;
+}
+</style>
 
 <?php 
 
@@ -112,10 +125,11 @@ th {
 
 </head>
 <body>
+<center><h2><?php echo $_GET["company"] ?></h2>
     <div class="row">
-        <div>
+<!--         <div>
         <canvas id="PieChartForCompany"></canvas>
-        </div>
+        </div> -->
         <div>
         <?php 
         echo "<table border='1'>
@@ -138,12 +152,7 @@ th {
         ?>
         </div>
     </div>
-  
+  </center>
    </body></html>
 
- <?php 
- 
- 
- ?>  
- 
  

@@ -228,7 +228,7 @@ $services_result_mos = mysql_query($query_services, $conn);
 	}
 
 
-	$query_US_employees_special = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Customer Order'";
+	$query_US_employees_special = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Sandeep Kumar') AND orderType = 'Customer Order'";
 
 	$US_empl_result_special = mysql_query($query_US_employees_special, $conn);
 
@@ -238,7 +238,7 @@ $services_result_mos = mysql_query($query_services, $conn);
 
 
 
-	$query_US_employees_special_internal = "SELECT sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Internal Order'";
+	$query_US_employees_special_internal = "SELECT sum(days) as Total FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Sandeep Kumar') AND orderType = 'Internal Order'";
 
 	$US_empl_result_special_internal = mysql_query($query_US_employees_special_internal, $conn);
 
@@ -249,7 +249,7 @@ $services_result_mos = mysql_query($query_services, $conn);
 
 
 
-	$query_other_employees = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person NOT IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') AND orderType = 'Customer Order'";
+	$query_other_employees = "SELECT sum(days) as USEmp FROM `isp_recording` WHERE person NOT IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Sandeep Kumar') AND orderType = 'Customer Order'";
 
 	$other_empl_result = mysql_query($query_other_employees, $conn);
 

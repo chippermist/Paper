@@ -6,67 +6,77 @@
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    <title>MOS Dashboard</title>
+      ga('create', 'UA-89738956-1', 'auto');
+      ga('send', 'pageview');
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+  </script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+  <title>MO Dashboard</title>
 
-    <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Animation library for notifications   -->
-    <link href="assets/css/animate.min.css" rel="stylesheet"/>
-
-    <!--  Paper Dashboard core CSS    -->
-    <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
-
-
-    <!--  Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/themify-icons.css" rel="stylesheet">
-
-    <!-- Important JavaScript Files -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.4/randomColor.min.js"></script>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js" type="text/javascript"></script>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
 
 
-    <style type="text/css">
-        .canvasjs-chart-credit {
-           display: none;
-       }
-   </style>
-   <!-- Data Retrival PHP File - very important -->
-   <?php include 'database_retrival.php' ?>
+  <!-- Bootstrap core CSS     -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
-   <script type="text/javascript">
+  <!-- Animation library for notifications   -->
+  <link href="assets/css/animate.min.css" rel="stylesheet"/>
+
+  <!--  Paper Dashboard core CSS    -->
+  <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
+
+
+  <!--  Fonts and icons     -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+  <link href="assets/css/themify-icons.css" rel="stylesheet">
+
+  <!-- Important JavaScript Files -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.4/randomColor.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js" type="text/javascript"></script>
+
+
+  <style type="text/css">
+    .canvasjs-chart-credit {
+       display: none;
+   }
+</style>
+<!-- Data Retrival PHP File - very important -->
+<?php include 'database_retrival.php' ?>
+
+<script type="text/javascript">
     window.onload = function () {
         var chart = new CanvasJS.Chart("chartContainer",
         {
             toolTip:{
         enabled: false   //enable here
-      },
-      legend: {
+    },
+    legend: {
         horizontalAlign: "center"
-     },
-            data: [
-            {
+    },
+    data: [
+    {
             //startAngle: 45,
             //animationEnabled: true,
-            indexLabelFontSize: 12.5,
+            indexLabelFontSize: 15,
             //indexLabelFontFamily: "Garamond",
             //indexLabelFontColor: "darkgrey",
             indexLabelLineColor: "darkgrey",
@@ -290,11 +300,12 @@
 </script>
 
 
+
 </head>
 <body>
 
     <div class="wrapper">
-        <div class="sidebar" data-background-color="white" data-active-color="info">
+        <div class="sidebar" data-background-color="black" data-active-color="info">
 
     <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -511,11 +522,20 @@
                     </div>
 
                 </div>
+
+                <?php
+               $US_Total = mysql_fetch_array($us_empl_result, MYSQL_ASSOC);
+               //$others_Total = mysql_fetch_array($other_empl_result, MYSQL_ASSOC);;
+               $others_Total = ($total_mos_2016 -  $US_Total['USEmp']);
+               $US_Total_special = mysql_fetch_array($US_empl_result_special, MYSQL_ASSOC);
+               ?>
+
+
                 <div class="row" style="margin-bottom: 0px">
                     <div class="col-md-6" style="padding-left: 0px">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title"><center><a href="2016_mos.php">Total: <?php echo $total_mos_2016 ?></a></center></h4>
+                                <h2 class="title"><center><a href="2016_mos.php"><?php echo ceil($others_Total + $US_Total_special['USEmp']) ?></a></center></h2>
                                 <p class="category"></p>
                             </div>
                             <div class="content">
@@ -534,8 +554,8 @@
                     <div class="col-md-6" style="padding-left: 0px">
                         <div class="card">
                             <div class="header">
-                            <?php $ans = mysql_fetch_array($NoServicesResult, MYSQL_ASSOC); ?>
-                                <h4 class="title"><center><a href="newMO.php">Services: <?php echo $ans['Total']; ?></a></center></h4>
+                                <?php $ans = mysql_fetch_array($NoServicesResult, MYSQL_ASSOC); ?>
+                                <h4 class="title"><center><a href="newMO.php">Services</a></center></h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content">
@@ -647,10 +667,10 @@
                </div>
 
                <?php
-               $US_Total = mysql_fetch_array($us_empl_result, MYSQL_ASSOC);
+               //$US_Total = mysql_fetch_array($us_empl_result, MYSQL_ASSOC);
                //$others_Total = mysql_fetch_array($other_empl_result, MYSQL_ASSOC);;
-               $others_Total = ($total_mos_2016 -  $US_Total['USEmp']);
-               $US_Total_special = mysql_fetch_array($US_empl_result_special, MYSQL_ASSOC);
+               //$others_Total = ($total_mos_2016 -  $US_Total['USEmp']);
+               //$US_Total_special = mysql_fetch_array($US_empl_result_special, MYSQL_ASSOC);
                ?>
 
                <div class="col-lg-3 col-sm-6" style="padding-left: 0px">
@@ -665,7 +685,7 @@
                             <div class="col-xs-7">
                                 <div class="numbers">
                                     <p>Non NA</p>
-                                    <a href="NON_NA_MO.php"><?php echo $others_Total ?></a>
+                                    <a href="NON_NA_MO.php"><?php echo ceil($others_Total) ?></a>
                                 </div>
                             </div>
                         </div>
@@ -686,7 +706,7 @@
                             <div class="col-xs-7">
                                 <div class="numbers">
                                     <p>NA</p>
-                                    <a href="NA_MO.php"><?php echo $US_Total_special['USEmp'] ?> </a>
+                                    <a href="NA_MO.php"><?php echo ceil($US_Total_special['USEmp']) ?> </a> <!-- Adding this number to print in total for year -->
                                 </div>
                             </div>
                         </div>
@@ -694,6 +714,55 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-3 col-sm-6" style="padding-left: 0px">
+                <div class="card">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="icon-big icon-info text-center">
+                                 <i class="ti-clipboard"></i>
+                             </div>
+                         </div>
+                         <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Internal Orders</p>
+                                <?php 
+                                $internalorders_mo = mysql_fetch_array($US_empl_result_special_internal, MYSQL_ASSOC);
+                                ?>
+                                <a href="Order-Class.php"><?php echo  ceil($internalorders_mo['Total']) ;?> </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6" style="padding-left: 0px">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-success text-center">
+                             <i class="ti-credit-card"></i>
+                         </div>
+                     </div>
+                     <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Customer Orders</p>
+                            <?php 
+                            mysql_data_seek($US_empl_result_special, 0);
+                            $customerorders_mo = mysql_fetch_array($US_empl_result_special, MYSQL_ASSOC);
+                            ?>
+                            <a href="Order-Class.php"><?php echo  ceil($customerorders_mo['USEmp']) ;?> </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
 
 
