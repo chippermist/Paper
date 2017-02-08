@@ -16,6 +16,10 @@
       ga('send', 'pageview');
 
   </script>
+  <script>
+      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
+
+  </script>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
   <title>MO Dashboard</title>

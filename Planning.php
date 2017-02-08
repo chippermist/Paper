@@ -22,6 +22,10 @@
 			display: none;
 		}
 	</style>
+	<script>
+      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
+
+  </script>
 
 	<style>
 		table {

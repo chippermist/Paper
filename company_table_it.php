@@ -2,6 +2,10 @@
 <title><?php echo $_GET["company"] ?></title>
 
 <link rel="stylesheet" type="text/css" href="../dmo/css/styles.css"/>
+<script>
+      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
+
+  </script>
 
 <?php 
 

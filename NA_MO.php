@@ -16,6 +16,10 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js" type="text/javascript"></script>
+	<script>
+      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
+
+  </script>
 
 	<style type="text/css">
 		.canvasjs-chart-credit {

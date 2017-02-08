@@ -1,5 +1,9 @@
 <meta charset="UTF-8">
 <title></title>
+<script>
+      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
+
+  </script>
 
 <link rel="stylesheet" type="text/css" href="../dmo/css/styles.css"/>
 

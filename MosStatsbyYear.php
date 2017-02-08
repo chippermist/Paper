@@ -15,6 +15,10 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     	<script type="text/javascript" src="assets/js/main.js"></script>
     	<?php include 'database_retrival.php' ?>
+        <script>
+      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
+
+  </script>
 
 		<script type="text/javascript">
         var data_years = {

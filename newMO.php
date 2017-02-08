@@ -23,6 +23,11 @@
 		}
 	</style>
 
+	<script>
+      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
+
+  </script>
+
 	<!-- Data Retrival PHP File - very important -->
 	<?php include 'database_retrival.php' ?>
 
