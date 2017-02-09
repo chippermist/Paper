@@ -35,12 +35,12 @@
 
 	mysql_select_db('mysql');
 
-	$query1 = "SELECT distinct type, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Days FROM `abcd_mos_2016` GROUP BY type";
+	$query1 = "SELECT distinct type, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Days FROM `abcd_mos_2017` GROUP BY type";
 
 	$result1 = mysql_query($query1, $conn);
 
 	if(!$result1) {
-		die('Could not get data from new ITP 2016 result1: ' . mysql_error());
+		die('Could not get data from new ITP 2017 result1: ' . mysql_error());
 	}
 	
 	?>
@@ -66,12 +66,12 @@
             showInLegend: false,
             dataPoints: [
             <?php
-            mysql_data_seek($services_result_mos_filter_2016, 0);
+            mysql_data_seek($services_result_mos_filter_2017, 0);
             $rowNumber = 0;
-            while($row = mysql_fetch_array($services_result_mos_filter_2016, MYSQL_ASSOC)){
+            while($row = mysql_fetch_array($services_result_mos_filter_2017, MYSQL_ASSOC)){
             	echo '{ y:' . $row['Total'] . ',legendText: "' . $row['Service'] .  '", indexLabel: "' . $row['Service'] . ' - #percent%"}'; 
-            	if(mysql_fetch_array($services_result_mos_filter_2016, MYSQL_ASSOC)){
-            		mysql_data_seek($services_result_mos_filter_2016, $rowNumber);
+            	if(mysql_fetch_array($services_result_mos_filter_2017, MYSQL_ASSOC)){
+            		mysql_data_seek($services_result_mos_filter_2017, $rowNumber);
             		echo ',';
             		$rowNumber++;
             	}
@@ -108,12 +108,12 @@
 					echo '<li>';
 					echo '<div class="collapsible-header"> <i class="material-icons">view_list</i>' . $row1['type'] . '</div><div class="collapsible-body">';
 					$servicename = $row1['type'];
-					$query2 = "SELECT distinct service, count(SO) as Days FROM `abcd_mos_2016` WHERE type = '$servicename' GROUP BY service" ;
+					$query2 = "SELECT distinct service, count(SO) as Days FROM `abcd_mos_2017` WHERE type = '$servicename' GROUP BY service" ;
 
 					$result2 = mysql_query($query2, $conn);
 
 					if(!$result2) {
-						die('Could not get data from new MOS 2016 result2: ' . mysql_error());
+						die('Could not get data from new MOS 2017 result2: ' . mysql_error());
 					}
 
 					echo '<ul class="collapsible popout" data-collapsible="accordion">';
@@ -122,11 +122,11 @@
 					while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC)){
 						echo '<li><div class="collapsible-header"><i class="material-icons">toc</i>' . $row2['service'] . ' - <b>' . $row2['Days'] . '</b></div><div class="collapsible-body">';
 						$subservicename = $row2['service'];
-						$query3 = "SELECT company , count(SO) as Total FROM `abcd_mos_2016` WHERE service = '$subservicename' GROUP BY company";
+						$query3 = "SELECT company , count(SO) as Total FROM `abcd_mos_2017` WHERE service = '$subservicename' GROUP BY company";
 						$result3 = mysql_query($query3, $conn);
 
 						if(!$result3) {
-							die('Could not get data from new ITP 2016 result3: ' . mysql_error());
+							die('Could not get data from new ITP 2017 result3: ' . mysql_error());
 						}
 
 						echo "<style>

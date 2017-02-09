@@ -166,14 +166,14 @@ $services_result_mos = mysql_query($query_services, $conn);
     	die('Invalid query: ' . mysql_error());
     }    
 
-    $totaldays_usa = 0;
-    $totaldays_canada = 0;
+    $totaldays_usa_2016 = 0;
+    $totaldays_canada_2016 = 0;
     $totaldays_usa_2015 =0;
     $totaldays_canada_2015 =0;
 
     while($row = mysql_fetch_array($USA_2016_result, MYSQL_ASSOC)) {
     	
-    	$totaldays_usa += $row["TotalDaysUSA"];
+    	$totaldays_usa_2016 += $row["TotalDaysUSA"];
     }
 
     $row = null;	
@@ -187,7 +187,7 @@ $services_result_mos = mysql_query($query_services, $conn);
 
     while($row = mysql_fetch_array($Canada_2016_result, MYSQL_ASSOC)) {
     	
-    	$totaldays_canada += $row["TotalDaysCanada"];
+    	$totaldays_canada_2016 += $row["TotalDaysCanada"];
     }
 
     $row = null;
@@ -266,6 +266,148 @@ $services_result_mos = mysql_query($query_services, $conn);
 		die('Could not get data from new ITP 2016 result1: ' . mysql_error());
 	}
 
+
+
+	////////////////////////////////////////////////////////////////////
+	//////////////////////   2017    ///////////////////////////////////
+$jan_mos_2017 =0; $feb_mos_2017=0; $mar_mos_2017=0;$apr_mos_2017=0; $may_mos_2017=0; $jun_mos_2017=0;$jul_mos_2017=0; $aug_mos_2017=0; $sep_mos_2017=0;$oct_mos_2017=0; $nov_mos_2017=0; $dec_mos_2017=0;
+if(! $conn ) {
+	die('Could not connect: ' . mysql_error());
+}
+
+$sql_mos_2017 =  'SELECT * FROM abcd_mos_2017';
+   //$sql = 'SELECT * FROM abcd';
+
+   //select 
+mysql_select_db('mysql');
+$retval_mos_2017 = mysql_query( $sql_mos_2017, $conn );
+
+if(! $retval_mos_2017 ) {
+	die('Could not get data from MOS 2017: ' . mysql_error());
+}
+
+/*// echo "<style>
+// table {
+//     border-collapse: collapse;
+//     width: 70%;
+// }
+
+// th, td {
+//     text-align: left;
+//     padding: 5px;
+// }
+
+// tr:nth-child(even){background-color: #f2f2f2}
+
+// th {
+//     background-color: #F0AB00;
+//     color: white;
+// }
+// </style>
+// ";
+   
+ */
+while($row = mysql_fetch_array($retval_mos_2017, MYSQL_ASSOC)) {
+	
+	
+	$jan_mos_2017 += $row['jan'];
+	$feb_mos_2017 += $row['feb'];
+	$mar_mos_2017 += $row['mar'];
+	$apr_mos_2017 += $row['apr'];
+	$may_mos_2017 += $row['may'];
+	$jun_mos_2017 += $row['jun'];
+	$jul_mos_2017 += $row['jul'];
+	$aug_mos_2017 += $row['aug'];
+	$sep_mos_2017 += $row['sep'];
+	$oct_mos_2017 += $row['oct'];
+	$nov_mos_2017 += $row['nov'];
+	$dec_mos_2017 += $row['dec'];
+	
+	
+	
+
+		// $retval1 = mysql_query( $sql, $conn );
+		// 	//echo count($row1['k']);
+		// while($row1 = mysql_fetch_array($retval1, MYSQL_ASSOC)) {
+		// 	//echo $row1['k'];
+		// }
+}
+
+	$totaldays_usa_2017 = 0;
+	$totaldays_canada_2017 = 0;
+
+$total_mos_2017 = $jan_mos_2017+$feb_mos_2017+$mar_mos_2017+$apr_mos_2017+$may_mos_2017+$jun_mos_2017+$jul_mos_2017+$aug_mos_2017+$sep_mos_2017+$oct_mos_2017+$nov_mos_2017+$dec_mos_2017;
+
+$query_services = "SELECT service as Service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_mos_2017` GROUP by service";
+
+$services_result_mos = mysql_query($query_services, $conn);
+
+    if (!$services_result_mos) { // add this check.
+    	die('Invalid query: ' . mysql_error());
+    }
+
+    $query_filter_services_mos_2017 = "SELECT DISTINCT type as Service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_mos_2017` GROUP by type";
+
+    $services_result_mos_filter_2017 = mysql_query($query_filter_services_mos_2017, $conn);
+
+   	if (!$services_result_mos_filter_2017) { // add this check.
+   		die('Invalid query: ' . mysql_error());
+   	}
+
+   	$query_USA_2017 = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as TotalDaysUSA FROM `abcd_mos_2017` WHERE country = 'USA' ";
+
+   	$USA_2017_result = mysql_query($query_USA_2017, $conn);
+
+    if (!$USA_2017_result) { // add this check.
+    	die('Invalid query: ' . mysql_error());
+    }
+$query_Canada_2017 = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as TotalDaysCanada FROM `abcd_mos_2017` WHERE country = 'Canada' ";
+
+    $Canada_2017_result = mysql_query($query_Canada_2017, $conn);
+
+    if (!$Canada_2017_result) { // add this check.
+    	die('Invalid query: ' . mysql_error());
+    }
+ while($row = mysql_fetch_array($USA_2017_result, MYSQL_ASSOC)) {
+    	
+    	$totaldays_usa_2017 += $row["TotalDaysUSA"];
+    }
+
+    $row = null;	
+
+ while($row = mysql_fetch_array($Canada_2017_result, MYSQL_ASSOC)) {
+    	
+    	$totaldays_canada_2017 += $row["TotalDaysCanada"];
+    }
+
+    $row = null;
+//Calculation of Top 5 companies for MOS 2017
+
+    $query_top5_mos_2017 = "SELECT company, sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as Total FROM `abcd_mos_2017` GROUP BY company ORDER BY Total DESC LIMIT 5";
+
+    $top5_mos_result = mysql_query($query_top5_mos_2017, $conn);
+
+	if (!$top5_mos_result) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
+//Based on US employees
+
+	$query_us_employees = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as USEmp FROM `abcd_mos_2017` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')";
+
+	$us_empl_result = mysql_query($query_us_employees, $conn);
+
+	if (!$us_empl_result) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
+
+
+$NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
+
+	$NoServicesResult = mysql_query($NoServices, $conn);
+
+	if(!$NoServicesResult) {
+		die('Could not get data from new ITP 2017 result1: ' . mysql_error());
+	}
 
 
 

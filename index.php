@@ -89,11 +89,12 @@
             showInLegend: true,
             dataPoints: [
             <?php
+            mysql_data_seek($services_result_mos_filter_2017, 0);
             $rowNumber = 0;
-            while($row = mysql_fetch_array($services_result_mos_filter_2016, MYSQL_ASSOC)){
+            while($row = mysql_fetch_array($services_result_mos_filter_2017, MYSQL_ASSOC)){
                 echo '{ y:' . $row['Total'] . ', legendText: "' . $row['Service'] . '", indexLabel: "#percent%"}'; 
-                if(mysql_fetch_array($services_result_mos_filter_2016, MYSQL_ASSOC)){
-                    mysql_data_seek($services_result_mos_filter_2016, ($rowNumber+1));
+                if(mysql_fetch_array($services_result_mos_filter_2017, MYSQL_ASSOC)){
+                    mysql_data_seek($services_result_mos_filter_2017, ($rowNumber+1));
                     echo ',';
                     $rowNumber++;
                 }
@@ -116,13 +117,13 @@
 
 <script type="text/javascript">
 
-    var dataBar2016 = {
+    var dataBar2017 = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
         {
             backgroundColor: '#F1C40F',
             borderColor: "#F1C40F",
-            data: [<?php echo $jan_mos_2016 ?>, <?php echo $feb_mos_2016 ?>, <?php echo $mar_mos_2016 ?>, <?php echo $apr_mos_2016 ?>, <?php echo $may_mos_2016 ?>, <?php echo $jun_mos_2016 ?>, <?php echo $jul_mos_2016 ?>, <?php echo $aug_mos_2016 ?>, <?php echo $sep_mos_2016 ?>, <?php echo $oct_mos_2016 ?>, <?php echo $nov_mos_2016 ?>, <?php echo $dec_mos_2016 ?>],
+            data: [<?php echo $jan_mos_2017 ?>, <?php echo $feb_mos_2017 ?>, <?php echo $mar_mos_2017 ?>, <?php echo $apr_mos_2017 ?>, <?php echo $may_mos_2017 ?>, <?php echo $jun_mos_2017 ?>, <?php echo $jul_mos_2017 ?>, <?php echo $aug_mos_2017 ?>, <?php echo $sep_mos_2017 ?>, <?php echo $oct_mos_2017 ?>, <?php echo $nov_mos_2017 ?>, <?php echo $dec_mos_2017 ?>],
             borderWidth: 1,
         }
         ]
@@ -137,9 +138,9 @@
 });
 
     function barChart1(){
-        var newChart = new Chart("chartContainer2016Bar", {
+        var newChart = new Chart("chartContainer2017Bar", {
             type: 'bar',
-            data: dataBar2016,
+            data: dataBar2017,
             options: {
                 legend: {
                     display: false
@@ -173,7 +174,7 @@
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
         {
-            label: "2015",
+            label: "2016",
             fill: false,
             lineTension: 0.1,
             backgroundColor: "rgba(30,144,255,1)",
@@ -191,11 +192,11 @@
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [<?php echo $jan_mos_2015 ?>, <?php echo $feb_mos_2015 ?>, <?php echo $mar_mos_2015 ?>, <?php echo $apr_mos_2015 ?>, <?php echo $may_mos_2015 ?>, <?php echo $jun_mos_2015 ?>, <?php echo $jul_mos_2015 ?>, <?php echo $aug_mos_2015 ?>, <?php echo $sep_mos_2015 ?>, <?php echo $oct_mos_2015 ?>, <?php echo $nov_mos_2015 ?>, <?php echo $dec_mos_2015 ?>],
+            data: [<?php echo $jan_mos_2016 ?>, <?php echo $feb_mos_2016 ?>, <?php echo $mar_mos_2016 ?>, <?php echo $apr_mos_2016 ?>, <?php echo $may_mos_2016 ?>, <?php echo $jun_mos_2016 ?>, <?php echo $jul_mos_2016 ?>, <?php echo $aug_mos_2016 ?>, <?php echo $sep_mos_2016 ?>, <?php echo $oct_mos_2016 ?>, <?php echo $nov_mos_2016 ?>, <?php echo $dec_mos_2016 ?>],
             spanGaps: false
         },
         {
-            label: "2016",
+            label: "2017",
             fill: false,
             lineTension: 0.1,
             backgroundColor: "rgba(255,165,0,1)",
@@ -213,7 +214,7 @@
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [<?php echo $jan_mos_2016 ?>, <?php echo $feb_mos_2016 ?>, <?php echo $mar_mos_2016 ?>, <?php echo $apr_mos_2016 ?>, <?php echo $may_mos_2016 ?>, <?php echo $jun_mos_2016 ?>, <?php echo $jul_mos_2016 ?>, <?php echo $aug_mos_2016 ?>, <?php echo $sep_mos_2016 ?>, <?php echo $oct_mos_2016 ?>, <?php echo $nov_mos_2016 ?>, <?php echo $dec_mos_2016 ?>],
+            data: [<?php echo $jan_mos_2017 ?>, <?php echo $feb_mos_2017 ?>, <?php echo $mar_mos_2017 ?>, <?php echo $apr_mos_2017 ?>, <?php echo $may_mos_2017 ?>, <?php echo $jun_mos_2017 ?>, <?php echo $jul_mos_2017 ?>, <?php echo $aug_mos_2017 ?>, <?php echo $sep_mos_2017 ?>, <?php echo $oct_mos_2017 ?>, <?php echo $nov_mos_2017 ?>, <?php echo $dec_mos_2017 ?>],
             spanGaps: false
         }
         ]
@@ -223,7 +224,7 @@
     //var ctx1 = document.getElementById("yearChartLine");
 
     function lineChartForYears() {
-        var myNewChart = new Chart("2016_2015_line", {
+        var myNewChart = new Chart("2017_2016_line", {
             type: 'line',
             data: data_years,
             options: {maintainAspectRatio: true}
@@ -507,12 +508,12 @@
                     <div class="col-md-6" style="padding-left: 0px">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title"><center><a href="MosStatsbyYear.php">2015 & 2016</a></center></h4>
+                                <h4 class="title"><center><a href="MosStatsbyYear.php">2016 & 2017</a></center></h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content">
                                 <div >
-                                    <canvas id="2016_2015_line" style="height:50%"></canvas>
+                                    <canvas id="2017_2016_line" style="height:50%"></canvas>
                                 </div>
 
                                 <div class="footer">
@@ -530,7 +531,7 @@
                 <?php
                $US_Total = mysql_fetch_array($us_empl_result, MYSQL_ASSOC);
                //$others_Total = mysql_fetch_array($other_empl_result, MYSQL_ASSOC);;
-               $others_Total = ($total_mos_2016 -  $US_Total['USEmp']);
+               $others_Total = ($total_mos_2017 -  $US_Total['USEmp']);
                $US_Total_special = mysql_fetch_array($US_empl_result_special, MYSQL_ASSOC);
                ?>
 
@@ -539,12 +540,12 @@
                     <div class="col-md-6" style="padding-left: 0px">
                         <div class="card">
                             <div class="header">
-                                <h2 class="title"><center><a href="2016_mos.php"><?php echo ceil($others_Total + $US_Total_special['USEmp']) ?></a></center></h2>
+                                <h2 class="title"><center><a href="2017_mos.php"><?php echo ceil($others_Total + $US_Total_special['USEmp']) ?></a></center></h2>
                                 <p class="category"></p>
                             </div>
                             <div class="content">
                                 <div >
-                                    <canvas id="chartContainer2016Bar" style="height:50%"></canvas>
+                                    <canvas id="chartContainer2017Bar" style="height:50%"></canvas>
                                 </div>
 
                                 <div class="footer">
@@ -606,7 +607,7 @@
 
                                             $companyname = $row['company'];
                                             mysql_select_db('mysql');
-                                            $query = "SELECT service as Service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_mos_2016` where company = '$companyname' GROUP by service";
+                                            $query = "SELECT service as Service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_mos_2017` where company = '$companyname' GROUP by service";
 
                                             $result_temp_company = mysql_query($query, $conn);
 
@@ -673,7 +674,7 @@
                <?php
                //$US_Total = mysql_fetch_array($us_empl_result, MYSQL_ASSOC);
                //$others_Total = mysql_fetch_array($other_empl_result, MYSQL_ASSOC);;
-               //$others_Total = ($total_mos_2016 -  $US_Total['USEmp']);
+               //$others_Total = ($total_mos_2017 -  $US_Total['USEmp']);
                //$US_Total_special = mysql_fetch_array($US_empl_result_special, MYSQL_ASSOC);
                ?>
 

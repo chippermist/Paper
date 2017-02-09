@@ -34,7 +34,7 @@ h2 {
 
     $companyname = $_GET["company"];
     mysql_select_db('mysql');
-    $query = "SELECT service as Service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_mos_2016` where company = '$companyname' GROUP by service";
+    $query = "SELECT service as Service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_mos_2017` where company = '$companyname' GROUP by service";
     //first pass just gets the column names
 
     //echo $query;

@@ -23,7 +23,7 @@
     $companyname = $_GET['company'];
     $servicename = $_GET['service_'];
     mysql_select_db('mysql');
-    $query = "SELECT service as Service, SO, person FROM `abcd_mos_2016` WHERE company = '$companyname' AND service = '$servicename'";
+    $query = "SELECT service as Service, SO, person FROM `abcd_mos_2017` WHERE company = '$companyname' AND service = '$servicename'";
     //first pass just gets the column names
 
     //echo $query;
