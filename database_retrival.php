@@ -447,10 +447,55 @@ $NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
 	//////////////////////////////////////////////////////////////////////////////////////////
 
 
-	$jan_it_2016 =0; $feb_it_2016=0; $mar_it_2016=0;$apr_it_2016=0; $may_it_2016=0; $jun_it_2016=0;$jul_it_2016=0; $aug_it_2016=0; $sep_it_2016=0;$oct_it_2016=0; $nov_it_2016=0; $dec_it_2016=0;
+	$jan_it_2017 =0; $feb_it_2017=0; $mar_it_2017=0;$apr_it_2017=0; $may_it_2017=0; $jun_it_2017=0;$jul_it_2017=0; $aug_it_2017=0; $sep_it_2017=0;$oct_it_2017=0; $nov_it_2017=0; $dec_it_2017=0;
 	if(! $conn ) {
 		die('Could not connect: ' . mysql_error());
 	}
+
+	$sql_it_2017 =  'SELECT * FROM abcd_it_2017';
+   //$sql = 'SELECT * FROM abcd';
+	
+   //select 
+	mysql_select_db('mysql');
+	$retval_it_2017 = mysql_query( $sql_it_2017, $conn );
+	
+	if(! $retval_it_2017 ) {
+		die('Could not get data from it 2017: ' . mysql_error());
+	}
+
+	
+	while($row = mysql_fetch_array($retval_it_2017, MYSQL_ASSOC)) {
+		
+		
+		$jan_it_2017 += $row['jan'];
+		$feb_it_2017 += $row['feb'];
+		$mar_it_2017 += $row['mar'];
+		$apr_it_2017 += $row['apr'];
+		$may_it_2017 += $row['may'];
+		$jun_it_2017 += $row['jun'];
+		$jul_it_2017 += $row['jul'];
+		$aug_it_2017 += $row['aug'];
+		$sep_it_2017 += $row['sep'];
+		$oct_it_2017 += $row['oct'];
+		$nov_it_2017 += $row['nov'];
+		$dec_it_2017 += $row['dec'];
+		
+		
+		
+
+		// $retval1 = mysql_query( $sql, $conn );
+		// 	//echo count($row1['k']);
+		// while($row1 = mysql_fetch_array($retval1, MYSQL_ASSOC)) {
+		// 	//echo $row1['k'];
+		// }
+	}
+	
+
+	$total_it_2017 = $jan_it_2017+$feb_it_2017+$mar_it_2017+$apr_it_2017+$may_it_2017+$jun_it_2017+$jul_it_2017+$aug_it_2017+$sep_it_2017+$oct_it_2017+$nov_it_2017+$dec_it_2017;
+
+
+	//for it 2016
+	$jan_it_2016 =0; $feb_it_2016=0; $mar_it_2016=0;$apr_it_2016=0; $may_it_2016=0; $jun_it_2016=0;$jul_it_2016=0; $aug_it_2016=0; $sep_it_2016=0;$oct_it_2016=0; $nov_it_2016=0; $dec_it_2016=0;
 
 	$sql_it_2016 =  'SELECT * FROM abcd_it_2016';
    //$sql = 'SELECT * FROM abcd';
@@ -463,6 +508,7 @@ $NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
 		die('Could not get data from it 2016: ' . mysql_error());
 	}
 
+	
 	
 	while($row = mysql_fetch_array($retval_it_2016, MYSQL_ASSOC)) {
 		
@@ -489,58 +535,12 @@ $NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
 		// 	//echo $row1['k'];
 		// }
 	}
-	
+
 
 	$total_it_2016 = $jan_it_2016+$feb_it_2016+$mar_it_2016+$apr_it_2016+$may_it_2016+$jun_it_2016+$jul_it_2016+$aug_it_2016+$sep_it_2016+$oct_it_2016+$nov_it_2016+$dec_it_2016;
 
 
-	//for it 2015
-	$jan_it_2015 =0; $feb_it_2015=0; $mar_it_2015=0;$apr_it_2015=0; $may_it_2015=0; $jun_it_2015=0;$jul_it_2015=0; $aug_it_2015=0; $sep_it_2015=0;$oct_it_2015=0; $nov_it_2015=0; $dec_it_2015=0;
-
-	$sql_it_2015 =  'SELECT * FROM abcd_it_2015';
-   //$sql = 'SELECT * FROM abcd';
-	
-   //select 
-	mysql_select_db('mysql');
-	$retval_it_2015 = mysql_query( $sql_it_2015, $conn );
-	
-	if(! $retval_it_2015 ) {
-		die('Could not get data from it 2015: ' . mysql_error());
-	}
-
-	
-	
-	while($row = mysql_fetch_array($retval_it_2015, MYSQL_ASSOC)) {
-		
-		
-		$jan_it_2015 += $row['jan'];
-		$feb_it_2015 += $row['feb'];
-		$mar_it_2015 += $row['mar'];
-		$apr_it_2015 += $row['apr'];
-		$may_it_2015 += $row['may'];
-		$jun_it_2015 += $row['jun'];
-		$jul_it_2015 += $row['jul'];
-		$aug_it_2015 += $row['aug'];
-		$sep_it_2015 += $row['sep'];
-		$oct_it_2015 += $row['oct'];
-		$nov_it_2015 += $row['nov'];
-		$dec_it_2015 += $row['dec'];
-		
-		
-		
-
-		// $retval1 = mysql_query( $sql, $conn );
-		// 	//echo count($row1['k']);
-		// while($row1 = mysql_fetch_array($retval1, MYSQL_ASSOC)) {
-		// 	//echo $row1['k'];
-		// }
-	}
-
-
-	$total_it_2015 = $jan_it_2015+$feb_it_2015+$mar_it_2015+$apr_it_2015+$may_it_2015+$jun_it_2015+$jul_it_2015+$aug_it_2015+$sep_it_2015+$oct_it_2015+$nov_it_2015+$dec_it_2015;
-
-
-	$query_services_it = "SELECT service as Service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_it_2016` GROUP by service";
+	$query_services_it = "SELECT service as Service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_it_2017` GROUP by service";
 
 	$services_result_it = mysql_query($query_services_it, $conn);
 
@@ -548,6 +548,14 @@ $NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
     	die('Invalid query: ' . mysql_error());
     }
 
+
+    $query_USA_2017_it = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as TotalDaysUSA FROM `abcd_it_2017` WHERE country = 'USA' ";
+
+    $USA_2017_result_it = mysql_query($query_USA_2017_it, $conn);
+
+    if (!$USA_2017_result_it) { // add this check.
+    	die('Invalid query: ' . mysql_error());
+    }
 
     $query_USA_2016_it = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as TotalDaysUSA FROM `abcd_it_2016` WHERE country = 'USA' ";
 
@@ -557,11 +565,11 @@ $NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
     	die('Invalid query: ' . mysql_error());
     }
 
-    $query_USA_2015_it = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as TotalDaysUSA FROM `abcd_it_2015` WHERE country = 'USA' ";
+    $query_Canada_2017_it = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as TotalDaysCanada FROM `abcd_it_2017` WHERE country = 'Canada' ";
 
-    $USA_2015_result_it = mysql_query($query_USA_2015_it, $conn);
+    $Canada_2017_result_it = mysql_query($query_Canada_2017_it, $conn);
 
-    if (!$USA_2015_result_it) { // add this check.
+    if (!$Canada_2017_result_it) { // add this check.
     	die('Invalid query: ' . mysql_error());
     }
 
@@ -571,55 +579,47 @@ $NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
 
     if (!$Canada_2016_result_it) { // add this check.
     	die('Invalid query: ' . mysql_error());
-    }
-
-    $query_Canada_2015_it = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as TotalDaysCanada FROM `abcd_it_2015` WHERE country = 'Canada' ";
-
-    $Canada_2015_result_it = mysql_query($query_Canada_2015_it, $conn);
-
-    if (!$Canada_2015_result_it) { // add this check.
-    	die('Invalid query: ' . mysql_error());
     }    
 
     $totaldays_usa_it = 0;
-    $totaldays_usa_it_2015 = 0;
+    $totaldays_usa_it_2016 = 0;
     $totaldays_canada_it = 0;
-    $totaldays_canada_it_2015 = 0;
+    $totaldays_canada_it_2016 = 0;
 
-    while($row = mysql_fetch_array($USA_2016_result_it, MYSQL_ASSOC)) {
+    while($row = mysql_fetch_array($USA_2017_result_it, MYSQL_ASSOC)) {
     	
     	$totaldays_usa_it += $row["TotalDaysUSA"];
     }
 
     $row = null;	
 
-    while($row = mysql_fetch_array($USA_2015_result_it, MYSQL_ASSOC)) {
+    while($row = mysql_fetch_array($USA_2016_result_it, MYSQL_ASSOC)) {
     	
-    	$totaldays_usa_it_2015 = $row["TotalDaysUSA"];
+    	$totaldays_usa_it_2016 = $row["TotalDaysUSA"];
     }
 
     $row = null;
 
-    while($row = mysql_fetch_array($Canada_2016_result_it, MYSQL_ASSOC)) {
+    while($row = mysql_fetch_array($Canada_2017_result_it, MYSQL_ASSOC)) {
     	
     	$totaldays_canada_it += $row["TotalDaysCanada"];
     }
 
     $row = null;
 
-    while($row = mysql_fetch_array($Canada_2015_result_it, MYSQL_ASSOC)) {
+    while($row = mysql_fetch_array($Canada_2016_result_it, MYSQL_ASSOC)) {
     	
-    	$totaldays_canada_it_2015 += $row["TotalDaysCanada"];
+    	$totaldays_canada_it_2016 += $row["TotalDaysCanada"];
     }
 
     $row = null;
 
 
-	//Calculation of Top 5 companies for IT 2016
+	//Calculation of Top 5 companies for IT 2017
 
-    $query_top5_it_2016 = "SELECT company, sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as Total FROM `abcd_it_2016` GROUP BY company ORDER BY Total DESC LIMIT 5";
+    $query_top5_it_2017 = "SELECT company, sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as Total FROM `abcd_it_2017` GROUP BY company ORDER BY Total DESC LIMIT 5";
 
-    $top5_it_result = mysql_query($query_top5_it_2016, $conn);
+    $top5_it_result = mysql_query($query_top5_it_2017, $conn);
 
 	if (!$top5_it_result) { // add this check.
 		die('Invalid query: ' . mysql_error());
@@ -627,18 +627,18 @@ $NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
 
 
 
-	$query_filter_services_it_2016 = "SELECT DISTINCT subservice as Service, sum(days) as Total FROM `abcd_it_2016_extra` GROUP by subservice";
+	$query_filter_services_it_2017 = "SELECT DISTINCT subservice as Service, sum(days) as Total FROM `abcd_it_2017_extra` GROUP by subservice";
 
-	$services_result_it_filter_2016 = mysql_query($query_filter_services_it_2016, $conn);
+	$services_result_it_filter_2017 = mysql_query($query_filter_services_it_2017, $conn);
 
-   	if (!$services_result_it_filter_2016) { // add this check.
+   	if (!$services_result_it_filter_2017) { // add this check.
    		die('Invalid query: ' . mysql_error());
    	}
 
 
    	//Based on US employees
 
-	$query_us_employees_it = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as USEmp FROM `abcd_it_2016` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')";
+	$query_us_employees_it = "SELECT sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as USEmp FROM `abcd_it_2017` WHERE person IN ( 'Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar')";
 
 	$us_empl_result_it = mysql_query($query_us_employees_it, $conn);
 
@@ -677,12 +677,12 @@ $NoServices = "SELECT count(SO) as Total FROM `abcd_mos_2017`";
 
 
 
-	$NoServicesIT = "SELECT count(SO) as Total FROM `abcd_it_2016_extra`";
+	$NoServicesIT = "SELECT count(SO) as Total FROM `abcd_it_2017_extra`";
 
 	$NoServicesResultIT = mysql_query($NoServicesIT, $conn);
 
 	if(!$NoServicesResultIT) {
-		die('Could not get data from new ITP 2016 result1: ' . mysql_error());
+		die('Could not get data from new ITP 2017 result1: ' . mysql_error());
 	}
 
 

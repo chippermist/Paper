@@ -25,7 +25,7 @@
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
             {
-                label: "2016",
+                label: "2017",
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: "rgba(255,165,0,1)",
@@ -43,11 +43,11 @@
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: [<?php echo $jan_it_2016 ?>, <?php echo $feb_it_2016 ?>, <?php echo $mar_it_2016 ?>, <?php echo $apr_it_2016 ?>, <?php echo $may_it_2016 ?>, <?php echo $jun_it_2016 ?>, <?php echo $jul_it_2016 ?>, <?php echo $aug_it_2016 ?>, <?php echo $sep_it_2016 ?>, <?php echo $oct_it_2016 ?>, <?php echo $nov_it_2016 ?>, <?php echo $dec_it_2016 ?>],
+                data: [<?php echo $jan_it_2017 ?>, <?php echo $feb_it_2017 ?>, <?php echo $mar_it_2017 ?>, <?php echo $apr_it_2017 ?>, <?php echo $may_it_2017 ?>, <?php echo $jun_it_2017 ?>, <?php echo $jul_it_2017 ?>, <?php echo $aug_it_2017 ?>, <?php echo $sep_it_2017 ?>, <?php echo $oct_it_2017 ?>, <?php echo $nov_it_2017 ?>, <?php echo $dec_it_2017 ?>],
                 spanGaps: false
             },
             {
-                label: "2015",
+                label: "2016",
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: "rgba(30,144,255,1)",
@@ -65,7 +65,7 @@
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: [<?php echo $jan_it_2015 ?>, <?php echo $feb_it_2015 ?>, <?php echo $mar_it_2015 ?>, <?php echo $apr_it_2015 ?>, <?php echo $may_it_2015 ?>, <?php echo $jun_it_2015 ?>, <?php echo $jul_it_2015 ?>, <?php echo $aug_it_2015 ?>, <?php echo $sep_it_2015 ?>, <?php echo $oct_it_2015 ?>, <?php echo $nov_it_2015 ?>, <?php echo $dec_it_2015 ?>],
+                data: [<?php echo $jan_it_2016 ?>, <?php echo $feb_it_2016 ?>, <?php echo $mar_it_2016 ?>, <?php echo $apr_it_2016 ?>, <?php echo $may_it_2016 ?>, <?php echo $jun_it_2016 ?>, <?php echo $jul_it_2016 ?>, <?php echo $aug_it_2016 ?>, <?php echo $sep_it_2016 ?>, <?php echo $oct_it_2016 ?>, <?php echo $nov_it_2016 ?>, <?php echo $dec_it_2016 ?>],
                 spanGaps: false
             }
         ]
@@ -75,7 +75,7 @@
     //var ctx1 = document.getElementById("yearChartLine");
 
     function lineChartForYears() {
-        var myNewChart = new Chart("2016_2015_line", {
+        var myNewChart = new Chart("2017_2016_line", {
             type: 'line',
             data: data_years,
             options: {maintainAspectRatio: true}
@@ -91,7 +91,7 @@
 	<body>
 		<div class="row">
 			<div class="left" style="width:50%">
-				<canvas id="2016_2015_line"></canvas>
+				<canvas id="2017_2016_line"></canvas>
 			</div> 
 			
 			<div>
@@ -117,30 +117,30 @@
 					</style>
 					";
 
-				echo '<table><thead><tr><th>Month</th><th>2015</th><th>2016</th></tr></thead>';
-				echo '<tr><td>January</td><td>' . $jan_it_2015 . '</td><td>' . $jan_it_2016 . '</td></tr>';
-				echo '<tr><td>February</td><td>' . $feb_it_2015 . '</td><td>' . $feb_it_2016 . '</td></tr>';
-				echo '<tr><td>March</td><td>' . $mar_it_2015 . '</td><td>' . $mar_it_2016 . '</td></tr>';
-				echo '<tr><td>April</td><td>' . $apr_it_2015 . '</td><td>' . $apr_it_2016 . '</td></tr>';
-				echo '<tr><td>May</td><td>' . $may_it_2015 . '</td><td>' . $may_it_2016 . '</td></tr>';
-				echo '<tr><td>June</td><td>' . $jun_it_2015 . '</td><td>' . $jun_it_2016 . '</td></tr>';
-				echo '<tr><td>July</td><td>' . $jul_it_2015 . '</td><td>' . $jul_it_2016 . '</td></tr>';
-				echo '<tr><td>August</td><td>' . $aug_it_2015 . '</td><td>' . $aug_it_2016 . '</td></tr>';
-				echo '<tr><td>September</td><td>' . $sep_it_2015 . '</td><td>' . $sep_it_2016 . '</td></tr>';
-				echo '<tr><td>October</td><td>' . $oct_it_2015 . '</td><td>' . $oct_it_2016 . '</td></tr>';
-				echo '<tr><td>November</td><td>' . $nov_it_2015 . '</td><td>' . $nov_it_2016 . '</td></tr>';
-				echo '<tr><td>December</td><td>' . $dec_it_2015 . '</td><td>' . $dec_it_2016 . '</td></tr>';
-				echo '<tr><th>Total</th><th>' . $total_it_2015 . '</th><th>' . $total_it_2016 . '</th></tr>';
+				echo '<table><thead><tr><th>Month</th><th>2016</th><th>2017</th></tr></thead>';
+				echo '<tr><td>January</td><td>' . $jan_it_2016 . '</td><td>' . $jan_it_2017 . '</td></tr>';
+				echo '<tr><td>February</td><td>' . $feb_it_2016 . '</td><td>' . $feb_it_2017 . '</td></tr>';
+				echo '<tr><td>March</td><td>' . $mar_it_2016 . '</td><td>' . $mar_it_2017 . '</td></tr>';
+				echo '<tr><td>April</td><td>' . $apr_it_2016 . '</td><td>' . $apr_it_2017 . '</td></tr>';
+				echo '<tr><td>May</td><td>' . $may_it_2016 . '</td><td>' . $may_it_2017 . '</td></tr>';
+				echo '<tr><td>June</td><td>' . $jun_it_2016 . '</td><td>' . $jun_it_2017 . '</td></tr>';
+				echo '<tr><td>July</td><td>' . $jul_it_2016 . '</td><td>' . $jul_it_2017 . '</td></tr>';
+				echo '<tr><td>August</td><td>' . $aug_it_2016 . '</td><td>' . $aug_it_2017 . '</td></tr>';
+				echo '<tr><td>September</td><td>' . $sep_it_2016 . '</td><td>' . $sep_it_2017 . '</td></tr>';
+				echo '<tr><td>October</td><td>' . $oct_it_2016 . '</td><td>' . $oct_it_2017 . '</td></tr>';
+				echo '<tr><td>November</td><td>' . $nov_it_2016 . '</td><td>' . $nov_it_2017 . '</td></tr>';
+				echo '<tr><td>December</td><td>' . $dec_it_2016 . '</td><td>' . $dec_it_2017 . '</td></tr>';
+				echo '<tr><th>Total</th><th>' . $total_it_2016 . '</th><th>' . $total_it_2017 . '</th></tr>';
 				echo '</table>';
 			?>
 			</div>
 
 			<div>
 				<?php
-				echo '<table><thead><tr><th>Country</th><th>2015</th><th>2016</th></tr></thead>';
+				echo '<table><thead><tr><th>Country</th><th>2016</th><th>2017</th></tr></thead>';
 
-				echo '<tr><td>USA</td><td>'. $totaldays_usa_it_2015 . '</td><td>' . $totaldays_usa_it . '</td></tr>';
-				echo '<tr><td>Canada</td><td>'. $totaldays_canada_it_2015 . '</td><td>' . $totaldays_canada_it . '</td></tr>';
+				echo '<tr><td>USA</td><td>'. $totaldays_usa_it_2016 . '</td><td>' . $totaldays_usa_it . '</td></tr>';
+				echo '<tr><td>Canada</td><td>'. $totaldays_canada_it_2016 . '</td><td>' . $totaldays_canada_it . '</td></tr>';
 
 				echo '</table>'; 
 				?>

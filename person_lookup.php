@@ -35,11 +35,11 @@
 
 	if($department == $ITP)
 	{
-		$query = "SELECT DISTINCT SO, company, service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM abcd_it_2016 WHERE person = '$personname' GROUP BY SO";
+		$query = "SELECT DISTINCT SO, company, service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM abcd_it_2017 WHERE person = '$personname' GROUP BY SO";
 	}
 	else
 	{
-		$query = "SELECT DISTINCT SO, company, service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM abcd_mos_2016 WHERE person = '$personname' GROUP BY SO";
+		$query = "SELECT DISTINCT SO, company, service, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM abcd_mos_2017 WHERE person = '$personname' GROUP BY SO";
 	}
 	
 
