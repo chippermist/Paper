@@ -24,7 +24,7 @@
     $companyname = $_GET['company'];
     $servicename = $_GET['service_'];
     mysql_select_db('mysql');
-    $query = "SELECT subservice as Service, SO, person, days as Total FROM `abcd_it_2016_extra` WHERE company = '$companyname' AND subservice = '$servicename'";
+    $query = "SELECT subservice as Service, SO, person, days as Total FROM `abcd_it_2017_extra` WHERE company = '$companyname' AND subservice = '$servicename'";
     //first pass just gets the column names
 
     //echo $query;

@@ -21,7 +21,7 @@
 
     
     mysql_select_db('mysql');
-    $query = "SELECT type as Service, company as Company, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_mos_2016` GROUP by type, company";
+    $query = "SELECT type as Service, company as Company, sum(`jan` + `feb` + `mar` + `apr` + `may` + `jun`+ `jul` + `aug` + `sep` + `oct` + `nov` + `dec`) as Total FROM `abcd_mos_2017` GROUP by type, company";
     //first pass just gets the column names
 
     //echo $query;

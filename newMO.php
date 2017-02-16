@@ -40,7 +40,7 @@
 	$result1 = mysql_query($query1, $conn);
 
 	if(!$result1) {
-		die('Could not get data from new ITP 2017 result1: ' . mysql_error());
+		die('Could not get data from new MO 2017 result1: ' . mysql_error());
 	}
 	
 	?>
@@ -66,7 +66,9 @@
             showInLegend: false,
             dataPoints: [
             <?php
-            mysql_data_seek($services_result_mos_filter_2017, 0);
+            if(!mysql_data_seek($services_result_mos_filter_2017, 0)){
+            	echo 'Cannot seek services_result_mos_filter_2017';
+            }
             $rowNumber = 0;
             while($row = mysql_fetch_array($services_result_mos_filter_2017, MYSQL_ASSOC)){
             	echo '{ y:' . $row['Total'] . ',legendText: "' . $row['Service'] .  '", indexLabel: "' . $row['Service'] . ' - #percent%"}'; 

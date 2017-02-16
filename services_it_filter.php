@@ -21,7 +21,7 @@
 
     
     mysql_select_db('mysql');
-    $query = "SELECT subservice as Service, company as Company, count(SO) as Total FROM `abcd_it_2016_extra` GROUP by subservice, company";
+    $query = "SELECT subservice as Service, company as Company, count(SO) as Total FROM `abcd_it_2017_extra` GROUP by subservice, company";
     //first pass just gets the column names
 
     //echo $query;

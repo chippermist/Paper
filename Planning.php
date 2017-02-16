@@ -50,7 +50,7 @@
 
 	<?php
 
-	$S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_2016`";
+	$S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_2017`";
 
 	$S_4_Count = mysql_query($S_4_Query, $conn);
 
@@ -60,7 +60,7 @@
 
 	$row_s4 = mysql_fetch_array($S_4_Count);
 
-	$NON_S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_non_s4_2016`";
+	$NON_S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_non_s4_2017`";
 
 	$NON_S_4_Count = mysql_query($NON_S_4_Query, $conn);
 	if (!$NON_S_4_Count) { // add this check.
@@ -156,7 +156,7 @@
 
 									<?php
 									echo '<ul class="collapsible popout" data-collapsible="accordion">';
-									$query1 = "SELECT * from `abcd_planning_2016` WHERE status = 'New'";
+									$query1 = "SELECT * from `abcd_planning_2017` WHERE status = 'New'";
 
 									$result1 = mysql_query($query1, $conn);
 
@@ -187,7 +187,7 @@
 
 			<?php
 			echo '<ul class="collapsible popout" data-collapsible="accordion">';
-			$query1 = "SELECT * from `abcd_planning_2016` WHERE status = 'Delivered'";
+			$query1 = "SELECT * from `abcd_planning_2017` WHERE status = 'Delivered'";
 
 			$result1 = mysql_query($query1, $conn);
 
@@ -226,7 +226,7 @@
 
 					<?php
 					echo '<ul class="collapsible popout" data-collapsible="accordion">';
-					$query1 = "SELECT * from `abcd_planning_non_s4_2016` WHERE status = 'New'";
+					$query1 = "SELECT * from `abcd_planning_non_s4_2017` WHERE status = 'New'";
 
 					$result1 = mysql_query($query1, $conn);
 
@@ -258,7 +258,7 @@
 
 				<?php
 				echo '<ul class="collapsible popout" data-collapsible="accordion">';
-				$query1 = "SELECT * from `abcd_planning_non_s4_2016` WHERE status = 'Delivered'";
+				$query1 = "SELECT * from `abcd_planning_non_s4_2017` WHERE status = 'Delivered'";
 
 				$result1 = mysql_query($query1, $conn);
 

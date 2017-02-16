@@ -91,10 +91,10 @@
             <?php
             mysql_data_seek($services_result_mos_filter_2017, 0);
             $rowNumber = 0;
-            while($row = mysql_fetch_array($services_result_mos_filter_2017, MYSQL_ASSOC)){
-                echo '{ y:' . $row['Total'] . ', legendText: "' . $row['Service'] . '", indexLabel: "#percent%"}'; 
+            while($rows = mysql_fetch_array($services_result_mos_filter_2017, MYSQL_ASSOC)){
+                echo '{ y:' . $rows['Total'] . ', legendText: "' . $rows['Service'] . '", indexLabel: "#percent%"}'; 
                 if(mysql_fetch_array($services_result_mos_filter_2017, MYSQL_ASSOC)){
-                    mysql_data_seek($services_result_mos_filter_2017, ($rowNumber+1));
+                    mysql_data_seek($services_result_mos_filter_2017, ($rowNumber));
                     echo ',';
                     $rowNumber++;
                 }
@@ -248,7 +248,7 @@
                     "#85C1E9",
                     "rgba(255,165,0,1)"
                     ],
-                    data: [<?php echo $totaldays_usa ?>, <?php echo $totaldays_canada ?>]
+                    data: [<?php echo $totaldays_usa_2017 ?>, <?php echo $totaldays_canada_2017 ?>]
                 }
                 ]
             };

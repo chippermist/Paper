@@ -69,12 +69,12 @@
 	<script type="text/javascript">
 
 		<?php
-		$query1_it = "SELECT distinct service, sum(days) as Days FROM `abcd_it_2016_extra` GROUP BY service";
+		$query1_it = "SELECT distinct service, sum(days) as Days FROM `abcd_it_2017_extra` GROUP BY service";
 
 		$result1_it = mysql_query($query1_it, $conn);
 
 		if(!$result1_it) {
-			die('Could not get data from new ITP 2016 result1: ' . mysql_error());
+			die('Could not get data from new ITP 2017 result1: ' . mysql_error());
 		}
 		
 		?>
@@ -126,12 +126,12 @@
 
 	<script type="text/javascript">
 		<?php
-		$query1 = "SELECT distinct service, sum(days) as Days FROM `abcd_it_2016_extra` GROUP BY service";
+		$query1 = "SELECT distinct service, sum(days) as Days FROM `abcd_it_2017_extra` GROUP BY service";
 
 		$result1 = mysql_query($query1, $conn);
 
 		if(!$result1) {
-			die('Could not get data from new ITP 2016 result1: ' . mysql_error());
+			die('Could not get data from new ITP 2017 result1: ' . mysql_error());
 		}
 		
 		while($row1 = mysql_fetch_array($result1, MYSQL_ASSOC)){
@@ -487,7 +487,7 @@
 		<script>
 			<?php
 
-			$S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_2016`";
+			$S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_2017`";
 
 			$S_4_Count = mysql_query($S_4_Query, $conn);
 
@@ -497,7 +497,7 @@
 
     $row_s4 = mysql_fetch_array($S_4_Count);
 
-    $NON_S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_non_s4_2016`";
+    $NON_S_4_Query = "SELECT DISTINCT COUNT(*) as count FROM `abcd_planning_non_s4_2017`";
 
     $NON_S_4_Count = mysql_query($NON_S_4_Query, $conn);
     if (!$NON_S_4_Count) { // add this check.

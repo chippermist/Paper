@@ -36,12 +36,12 @@
 
 	mysql_select_db('mysql');
 
-	$query1 = "SELECT distinct service, count(SO) as Days FROM `abcd_it_2016_extra` GROUP BY service";
+	$query1 = "SELECT distinct service, count(SO) as Days FROM `abcd_it_2017_extra` GROUP BY service";
 
 	$result1 = mysql_query($query1, $conn);
 
 	if(!$result1) {
-		die('Could not get data from new ITP 2016 result1: ' . mysql_error());
+		die('Could not get data from new ITP 2017 result1: ' . mysql_error());
 	}
 
 	?>
@@ -52,12 +52,12 @@
 	<script type="text/javascript">
 
 		<?php
-		$query1_it = "SELECT distinct service, sum(days) as Days FROM `abcd_it_2016_extra` GROUP BY service";
+		$query1_it = "SELECT distinct service, sum(days) as Days FROM `abcd_it_2017_extra` GROUP BY service";
 
 		$result1_it = mysql_query($query1_it, $conn);
 
 		if(!$result1_it) {
-			die('Could not get data from new ITP 2016 result1: ' . mysql_error());
+			die('Could not get data from new ITP 2017 result1: ' . mysql_error());
 		}
 		
 		?>
@@ -124,12 +124,12 @@
 					echo '<li>';
 					echo '<div class="collapsible-header"> <i class="material-icons">view_list</i>' . $row1['service'] . '</div><div class="collapsible-body">';
 					$servicename = $row1['service'];
-					$query2 = "SELECT distinct subservice, count(SO) as Orders FROM `abcd_it_2016_extra` WHERE service = '$servicename' GROUP BY subservice" ;
+					$query2 = "SELECT distinct subservice, count(SO) as Orders FROM `abcd_it_2017_extra` WHERE service = '$servicename' GROUP BY subservice" ;
 
 					$result2 = mysql_query($query2, $conn);
 
 					if(!$result2) {
-						die('Could not get data from new ITP 2016 result2: ' . mysql_error());
+						die('Could not get data from new ITP 2017 result2: ' . mysql_error());
 					}
 
 					echo '<ul class="collapsible popout" data-collapsible="accordion">';
@@ -138,11 +138,11 @@
 					while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC)){
 						echo '<li><div class="collapsible-header"><i class="material-icons">toc</i>' . $row2['subservice'] . ' - <b>' . $row2['Orders'] . '</b></div><div class="collapsible-body">';
 						$subservicename = $row2['subservice'];
-						$query3 = "SELECT company , count(SO) as Total FROM `abcd_it_2016_extra` WHERE subservice = '$subservicename' GROUP BY company";
+						$query3 = "SELECT company , count(SO) as Total FROM `abcd_it_2017_extra` WHERE subservice = '$subservicename' GROUP BY company";
 						$result3 = mysql_query($query3, $conn);
 
 						if(!$result3) {
-							die('Could not get data from new ITP 2016 result3: ' . mysql_error());
+							die('Could not get data from new ITP 2017 result3: ' . mysql_error());
 						}
 
 						echo "<style>

@@ -27,6 +27,10 @@
     <script type="text/javascript">
     	<?php
 
+            if (!mysql_data_seek($services_result_mos, 0)) {
+            echo 'Cannot seek to row $i: ' . mysql_error() . '\n';
+            continue;
+            }
     		while($row = mysql_fetch_array($services_result_mos, MYSQL_ASSOC)){
     			$label_array[] = $row['Service'];
     			$data_points[] = $row['Total'];
