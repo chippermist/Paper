@@ -94,6 +94,7 @@
             //indexLabelFontColor: "darkgrey",
             indexLabelLineColor: "darkgrey",
             indexLabelPlacement: "outside",
+            percentFormatString: "#",
             type: "doughnut",
             showInLegend: true,
             dataPoints: [
@@ -403,7 +404,7 @@
 
 	function lineChartForYears() {
 		var myNewChart = new Chart("2017_2016_line", {
-			type: 'line',
+			type: 'bar',
 			data: data_years,
 			options: {maintainAspectRatio: true}
 		}
@@ -601,6 +602,12 @@
 					<p>ITP</p>
 				</a>
 			</li>
+			<li class="inactive">
+            <a href="combined.php">
+                <i class="ti-panel"></i>
+                <p>Both</p>
+            </a>
+        </li>
 		</ul>
 	</div>
 </div>
@@ -663,7 +670,7 @@
 			<div class="col-md-6" style="padding-left: 0px">
 				<div class="card">
 					<div class="header">
-						<h2 class="title"><center><a href="2016_it.php"><?php echo ceil($others_Total_it + $US_Total_it_special['USEmp']) ?></a></center></h2>
+						<h2 class="title"><center><a href="2017_it.php"><?php echo ceil($total_it_2017) ?></a></center></h2>
 						<p class="category"></p>
 					</div>
 					<div class="content">

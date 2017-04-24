@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>MO Data NON-NA</title>
+	<title>MO/ITP Data NA</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="assets/js/jquery-1.10.2.js"></script>
 	<!-- Compiled and minified CSS -->
@@ -16,27 +16,27 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js" type="text/javascript"></script>
+	<script>
+      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
+
+  </script>
 
 	<style type="text/css">
 		.canvasjs-chart-credit {
 			display: none;
 		}
 	</style>
-	<script>
-      console.log("%cWhat's up? This area is forbidden.", "background: red; color: yellow; font-size: x-large");
-
-  </script>
 	<?php include 'database_retrival.php' ?>
 </head>
 <body>
 </body>
 <?php
-$query_us_employees_each = "SELECT distinct person, sum(`jan`+ `feb`+ `mar` + `apr`+ `may`+ `jun`+ `jul`+ `aug`+ `sep`+ `oct`+ `nov`+ `dec`) as USEmp FROM `abcd_mos_2017` WHERE person NOT IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez') GROUP BY person";
+$query_us_employees_each = "SELECT distinct person, sum(days) as USEmp FROM `isp_recording` WHERE person IN ('Anil Kumar Kunapareddy', 'Julio Cezar Almeida', 'Parishudh Reddy Marupurolu', 'Chinmay Garg', 'Deepika Paturu', 'Kiran Bose', 'Rahul Shetti', 'Rajendra N', 'Rakesh Patel', 'Sriram Bhaskar', 'Wilson Karunakar Puvvula', 'Steven Sanchez', 'Sandeep Kumar', 'Deepika Paturu', 'Julio Cezar Almeida','Kaushik Bangalore Venkatarama', 'David Uhr', 'Balakameswara Sarma Sishta', 'Kishan Vimalachandran', 'Abhishek Anand', 'mr. Mrinal Sarkar') AND orderType = 'Customer Order' GROUP BY person";
 
 $us_empl_result_each = mysql_query($query_us_employees_each, $conn);
 
 	if (!$us_empl_result_each) { // add this check.
-		die('Invalid query: ' . mysql_error());
+		die('Invalid query: ' . mysql_error()); 
 	}
 
 	echo "<style>

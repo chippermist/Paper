@@ -36,7 +36,7 @@ $query_us_employees_each = "SELECT distinct person, sum(days) as USEmp FROM `isp
 $us_empl_result_each = mysql_query($query_us_employees_each, $conn);
 
 	if (!$us_empl_result_each) { // add this check.
-		die('Invalid query: ' . mysql_error());
+		die('Invalid query: ' . mysql_error()); 
 	}
 
 	echo "<style>

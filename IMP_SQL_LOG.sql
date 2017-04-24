@@ -46,43 +46,43 @@ segreggation for non S/4 and S/4
 
 
 -----------------------------------------------------------
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'SAP Going Live Support'
 WHERE service = 'SAP Going Live Support' OR service = 'SAP On Call Duty'
 
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'Software Change Management'
 WHERE service = 'SAP Software Change Management' OR service = 'SAP ESRV Change Control Management'
 
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'Empowering Services'
 WHERE service = 'SAP Empowering Service' OR service = 'SAP ESRV Delivery Management' OR service = 'SAP ESRV SysMon' OR service = 'SAP Empowering Service' OR service = 'SAP E2E Empowering Workshop'
 
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'Business Downtime Optimization'
 WHERE service = 'SAP ESRV Business Downtime Optimization' OR service = 'SAP Platform Design Support'
 
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'HANA Planning Workshop'
 WHERE service = 'SAP Migration Planning Workshop' OR service = 'SAP IT Planning Service' OR service = 'SAP Planning the Digital Transformation' 
 
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'Assessment Services'
 WHERE service = 'SAP Technical Integration Check' OR service = 'SAP CDP On-Site Support' OR service = 'SAP Technical Integration Check-Extended' OR service = 'SAP Tech Feasibility Check-Upgrade' OR service = 'SAP Technical Feasibility Check' OR service = 'SAP Tech Integration Check-Upgrade' OR service = 'SAP ESRV ALM Roadmap' OR service = 'SAP Upgrade Assessment' OR 'SAP CDP On-Site Support'
 
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'Custom Code Management'
 WHERE service = 'SAP Custom Code Management' OR service = 'SAP ESRV Custom Code Assessment'
 
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'Integration Validation'
 WHERE service = 'SAP Integration Validation'
 
-UPDATE `abcd_mos_2016`
+UPDATE `abcd_mos_2017`
 SET type = 'S/4 HANA Safeguarding'
 WHERE service = 'SAP S/4 HANA Safeguarding'
 
-UPDATE 'abcd_mos_2016'
+UPDATE `abcd_mos_2017`
 SET type = 'Build Design Support'
 WHERE service = 'SAP Build Design Support'
 
@@ -145,6 +145,10 @@ WHERE orderType = 'Internal Order' AND company = 'MCC NA Deployment Supp HANA/Gr
 UPDATE `isp_recording`
 SET description = 'BO Weekend'
 WHERE orderType = 'Internal Order' AND company = 'MCC NA Production Support Weekend/Graf,'
+
+UPDATE `isp_recording`
+SET description = 'Back Office Duty'
+WHERE orderType = 'Internal Order' AND company = 'MCC NA Production Support Weekday/Graf,'
 
 UPDATE `isp_recording`
 SET description = 'RDR'
