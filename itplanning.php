@@ -603,11 +603,17 @@
 				</a>
 			</li>
 			<li class="inactive">
-            <a href="combined.php">
+            <a href="dm.php">
                 <i class="ti-panel"></i>
-                <p>Both</p>
+                <p>DM</p>
             </a>
-        </li>
+        	</li>
+			<li class="inactive">
+	            <a href="combined.php">
+	                <i class="ti-panel"></i>
+	                <p>All</p>
+	            </a>
+        	</li>
 		</ul>
 	</div>
 </div>
@@ -739,7 +745,7 @@
 							<div class="col-xs-7">
 								<div class="numbers">
 									<p>CoE NA ITP</p>
-									<a href="NA_ITP.php"><?php echo $US_Total_it_special['USEmp'] ?></a>
+									<a href="NA_ITP.php"><?php echo $total_it_2017 - $others_Total_it ?></a>
 								</div>
 							</div>
 						</div>

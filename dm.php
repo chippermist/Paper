@@ -124,7 +124,7 @@
         {
             backgroundColor: '#F1C40F',
             borderColor: "#F1C40F",
-            data: [<?php echo $jan_mos_2017 ?>, <?php echo $feb_mos_2017 ?>, <?php echo $mar_mos_2017 ?>, <?php echo $apr_mos_2017 ?>, <?php echo $may_mos_2017 ?>, <?php echo $jun_mos_2017 ?>, <?php echo $jul_mos_2017 ?>, <?php echo $aug_mos_2017 ?>, <?php echo $sep_mos_2017 ?>, <?php echo $oct_mos_2017 ?>, <?php echo $nov_mos_2017 ?>, <?php echo $dec_mos_2017 ?>],
+            data: [<?php echo $jan_dm_2017 ?>, <?php echo $feb_dm_2017 ?>, <?php echo $mar_dm_2017 ?>, <?php echo $apr_dm_2017 ?>, <?php echo $may_dm_2017 ?>, <?php echo $jun_dm_2017 ?>, <?php echo $jul_dm_2017 ?>, <?php echo $aug_dm_2017 ?>, <?php echo $sep_dm_2017 ?>, <?php echo $oct_dm_2017 ?>, <?php echo $nov_dm_2017 ?>, <?php echo $dec_dm_2017 ?>],
             borderWidth: 1,
         }
         ]
@@ -170,72 +170,7 @@
     addFunctionOnWindowLoad(barChart1);
 </script>
 
-<script type="text/javascript">
-    var data_years = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [
-        {
-            label: "2016",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(30,144,255,1)",
-            borderColor: "rgba(30,144,255,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#F15854",
-            pointHoverBorderColor: "#F15854",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [<?php echo $jan_mos_2016 ?>, <?php echo $feb_mos_2016 ?>, <?php echo $mar_mos_2016 ?>, <?php echo $apr_mos_2016 ?>, <?php echo $may_mos_2016 ?>, <?php echo $jun_mos_2016 ?>, <?php echo $jul_mos_2016 ?>, <?php echo $aug_mos_2016 ?>, <?php echo $sep_mos_2016 ?>, <?php echo $oct_mos_2016 ?>, <?php echo $nov_mos_2016 ?>, <?php echo $dec_mos_2016 ?>],
-            spanGaps: false
-        },
-        {
-            label: "2017",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(255,165,0,1)",
-            borderColor: "rgba(255,165,0,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#F15854",
-            pointHoverBorderColor: "#F15854",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [<?php echo $jan_mos_2017 ?>, <?php echo $feb_mos_2017 ?>, <?php echo $mar_mos_2017 ?>, <?php echo $apr_mos_2017 ?>, <?php echo $may_mos_2017 ?>, <?php echo $jun_mos_2017 ?>, <?php echo $jul_mos_2017 ?>, <?php echo $aug_mos_2017 ?>, <?php echo $sep_mos_2017 ?>, <?php echo $oct_mos_2017 ?>, <?php echo $nov_mos_2017 ?>, <?php echo $dec_mos_2017 ?>],
-            spanGaps: false
-        }
-        ]
-    };
 
-
-    //var ctx1 = document.getElementById("yearChartLine");
-
-    function lineChartForYears() {
-        var myNewChart = new Chart("2017_2016_line", {
-            type: 'bar',
-            data: data_years,
-            options: {maintainAspectRatio: true}
-        }
-        )
-    };
-
-
-    addFunctionOnWindowLoad(lineChartForYears);
-</script>
 
 <!-- pie chart for USA and Canada -->
 <script type="text/javascript">
@@ -324,7 +259,7 @@
     </div>
 
     <ul class="nav">
-        <li class="active">
+        <li class="inactive">
             <a href="index.php">
                 <i class="ti-panel"></i>
                 <p>MO</p>
@@ -336,8 +271,7 @@
                 <p>ITP</p>
             </a>
         </li>
-        
-        <li class="inactive">
+        <li class="active">
             <a href="dm.php">
                 <i class="ti-panel"></i>
                 <p>DM</p>
@@ -368,26 +302,6 @@
                             <div class="content">
                                 <div >
                                     <canvas id="pieChartUSACanada" style="height:50%"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6" style="padding-left: 0px">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title"><center><a href="MosStatsbyYear.php">2016 & 2017</a></center></h4>
-                                <p class="category"></p>
-                            </div>
-                            <div class="content">
-                                <div >
-                                    <canvas id="2017_2016_line" style="height:50%"></canvas>
-                                </div>
-
-                                <div class="footer">
-                                    <!-- <hr>
-                                    <div class="stats">
-                                        
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -578,7 +492,7 @@
                             <div class="col-xs-7">
                                 <div class="numbers">
                                     <p>NA</p>
-                                    <a href="NA_MO.php"><?php echo ceil($total_mos_2017 - $others_Total) ?> </a> <!-- Adding this number to print in total for year -->
+                                    <a href="NA_MO.php"><?php echo ceil($US_Total_special['USEmp']) ?> </a> <!-- Adding this number to print in total for year -->
                                 </div>
                             </div>
                         </div>

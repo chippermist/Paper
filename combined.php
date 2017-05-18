@@ -289,10 +289,16 @@
         <p>ITP</p>
       </a>
     </li>
+    <li class="inactive">
+            <a href="dm.php">
+                <i class="ti-panel"></i>
+                <p>DM</p>
+            </a>
+        </li>
     <li class="active">
       <a href="combined.php">
         <i class="ti-panel"></i>
-        <p>Both</p>
+        <p>All</p>
       </a>
     </li>
   </ul>
